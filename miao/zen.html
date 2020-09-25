@@ -23,10 +23,10 @@
       }
       a {
         text-decoration: none;
-        color: #e33e33;
+        color: gray;
       }
       a:hover {
-        color: gray;
+        color: #e33e33;
       }
       h2 {
         width: 400px;
@@ -36,11 +36,44 @@
       }
       h3 {
         margin: 0 auto;
-        width: 400px;
-        background-color: #83cff3;
-        color: #e33e33;
+        width: 350px;
+        color: gray;
         line-height: 3;
         border-radius: 55px;
+      }
+      .footer {
+        margin: 60px auto;
+      }
+      .ft_lft {
+        float: left;
+        text-align: left;
+      }
+      .footer h3 {
+        background-color: #addfeb;
+      }
+      .footer li {
+        font-size: 14px;
+      }
+      .archives {
+        float: right;
+        text-align: left;
+      }
+      .resources {
+        float: left;
+        margin-left: 140px;
+        text-align: left;
+      }
+      .ft_lft a {
+        display: block;
+        float: left;
+        width: 160px;
+      }
+      .ft_lft em {
+        float: left;
+        margin: 0 10px;
+        font-style: normal;
+        color: gray;
+        font-size: 12px;
       }
     </style>
   </head>
@@ -184,46 +217,71 @@
         <a href="#">A11y </a>
         <a href="#">GH</a>
       </p>
-      <h3>Select a Design:</h3>
-      <ul>
-        <li>
-          <a href="#">Mid Century Modern</a> by <a href="">Andrew Lohman</a>
-        </li>
-        <li><a href="#">Garments </a> by <a href="">Dan Mall</a></li>
-        <li><a href="#">Steel </a> by <a href="">Steffen Knoeller</a></li>
-        <li><a href="#">Apothecary </a> by <a href="">Trent Walton</a></li>
-        <li>
-          <a href="#">Screen Filler</a> by <a href="">Elliot Jay Stocks</a>
-        </li>
-        <li><a href="#">Fountain Kiss </a> by <a href="">Jeremy Carlson</a></li>
-        <li>
-          <a href="#">A Robot Named Jimmy </a> by <a href="">meltmedia</a>
-        </li>
-        <li><a href="#">Verde Moderna</a> by <a href="">Dave Shea</a></li>
-      </ul>
-      <h3>Archives:</h3>
-      <ul>
-        <li><a href="#">Next Design ></a></li>
-        <li><a href="#">View All designs</a></li>
-      </ul>
-      <h3>Resources:</h3>
-      <ul>
-        <li>
-          <a href="#"
-            >View This Design's<abbr title="Cascading Style Sheet">CSS</abbr></a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><abbr title="Cascading Style Sheet">CSS</abbr>Resources</a
-          >
-        </li>
-        <li>
-          <a href="#"><abbr title="Cascading Style Sheet">FAQ</abbr></a>
-        </li>
-        <li><a href="#">Submit a Design</a></li>
-        <li><a href="#">Translations</a></li>
-      </ul>
+      <div class="footer">
+        <div class="ft_lft">
+          <h3 class="selection">Select a Design:</h3>
+          <ul>
+            <li>
+              <a href="#">Mid Century Modern</a> <em>by</em>
+              <a href="">Andrew Lohman</a>
+            </li>
+            <li>
+              <a href="#">Garments </a> <em>by</em> <a href="">Dan Mall</a>
+            </li>
+            <li>
+              <a href="#">Steel </a> <em>by</em> <a href="">Steffen Knoeller</a>
+            </li>
+            <li>
+              <a href="#">Apothecary </a> <em>by</em>
+              <a href="">Trent Walton</a>
+            </li>
+            <li>
+              <a href="#">Screen Filler</a> <em>by</em>
+              <a href="">Elliot Jay Stocks</a>
+            </li>
+            <li>
+              <a href="#">Fountain Kiss </a> <em>by</em>
+              <a href="">Jeremy Carlson</a>
+            </li>
+            <li>
+              <a href="#">A Robot Named Jimmy </a> <em>by</em>
+              <a href="">meltmedia</a>
+            </li>
+            <li>
+              <a href="#">Verde Moderna</a> <em>by</em> <a href="">Dave Shea</a>
+            </li>
+          </ul>
+        </div>
+        <div class="archives">
+          <h3>Archives:</h3>
+          <ul>
+            <li><a href="#">Next Design ></a></li>
+            <li><a href="#">View All designs</a></li>
+          </ul>
+        </div>
+        <div class="resources">
+          <h3>Resources:</h3>
+          <ul>
+            <li>
+              <a href="#"
+                >View This Design's<abbr title="Cascading Style Sheet"
+                  >CSS</abbr
+                ></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><abbr title="Cascading Style Sheet">CSS</abbr>Resources</a
+              >
+            </li>
+            <li>
+              <a href="#"><abbr title="Cascading Style Sheet">FAQ</abbr></a>
+            </li>
+            <li><a href="#">Submit a Design</a></li>
+            <li><a href="#">Translations</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
 </html>
