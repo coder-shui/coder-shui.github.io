@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2 id="page-top">Lorem.</h2>
+    <h3>Lorem, ipsum.</h3>
+    <h4>Lorem, ipsum dolor.</h4>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi qui,
+      sapiente molestiae reprehenderit iusto debitis nihil praesentium dolorum
+      vel veritatis quo possimus autem amet illum minus provident eligendi rerum
+      incidunt!
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Est fugit nisi,
+      voluptate facilis dolorum, labore soluta nam cumque debitis necessitatibus
+      assumenda deleniti saepe qui sapiente iure quod ipsum dolor repellat.
+    </p>
+    <a href="http://jd.com/">在新窗口打开京东</a>
+    <a href="mailto:aaa@bbb.com">点击给我发邮件</a>
+    <a href="#">跳转到页面底部</a>
+    <a href="images/stock-photo-229389427.jpg">点我可以下载一个文件</a><br />
+    <img
+      src="images/stock-photo-229389427.jpg"
+      alt="葡萄"
+      width="200"
+      height="200"
+    />
+    <hr />
+    <hr />
+    <marquee behavior="" direction="">飘~~~</marquee>
+    <p>
+      <em>这几种强调</em> <b>有什么</b> <strong>区别呢？</strong>
+      <u>这个呢？</u> <i>这个呢？</i>
+    </p>
+    <p>&lt;!--这段注释需要出现在页面里面 --></p>
+    <br />
+    <p>html的注释怎么写？</p>
+    <p>下面是一段javascript代码，最合适用何种标签表示呢？</p>
+    <pre><code>
+    function a(){
+      return 8
+    }</code></pre>
+    <hr />
+    <ul style="list-style: none">
+      <li>
+        小学
+        <ol>
+          <li>
+            一年级
+            <ol>
+              <li>上学期</li>
+              <li>下学期</li>
+            </ol>
+          </li>
+          <li>二年级</li>
+          <li>三年级</li>
+        </ol>
+      </li>
+      <li>中学</li>
+      <li>大学</li>
+    </ul>
+    <hr />
+    <dl>
+      <dt>班级</dt>
+      <dd>三年二班</dd>
+      <dt>老师</dt>
+      <dd>张老师</dd>
+      <dd>李老师</dd>
+      <dd>王老师</dd>
+      <dt>学生</dt>
+      <dd>小明</dd>
+      <dd>豆豆</dd>
+    </dl>
+    <hr />
+    <h4>Google搜索</h4>
+    <form action="https://www.google.com/search">
+      <input type="text" placeholder="请输入想要搜索的内容" name="q" />
+      <input type="submit" value="在新窗口打开搜索结果" />
+    </form>
+    <form action="">
+      <dl>
+        <dt>个人信息调查表</dt>
+        <dt>性别：</dt>
+        <dd>
+          <input type="radio" name="sex" value="male" id="male" />
+          <label for="male">男</label>
+          <input type="radio" name="sex" value="female" id="female" /><label
+            for="female"
+            >女</label
+          >
+        </dd>
+        <dt>
+          <label for="age">年龄：</label>
+        </dt>
+        <dd>
+          <select name="age" id="age">
+            <optgroup label="少年">
+              <option value="1-6">一到六岁</option>
+              <option value="6-12">六到十二岁</option>
+            </optgroup>
+            <optgroup label="青年">
+              <option value="13-15">十三到十五</option>
+              <option value="16-18">十六到十八</option>
+            </optgroup>
+            <optgroup label="壮年">
+              <option value="18-22">十八到二十二</option>
+              <option value="23-30">二十三到三十</option>
+            </optgroup>
+          </select>
+        </dd>
+        <dt>
+          <label for="birth-day">生日</label>
+        </dt>
+        <dd><input type="datetime-local" name="birth-day" id="birth-day" /></dd>
+        <dt>
+          <label for="birth-time">生辰</label>
+        </dt>
+        <dd><input type="time" name="birth-time" id="birth-time" /></dd>
+        <dt>照片</dt>
+        <dd>
+          <label for="upload">点我上传照片，我比文件上传按钮好看</label>
+          <input type="file" name="picture" id="upload" hidden />
+        </dd>
+        <dt>肤色</dt>
+        <dd>
+          <input type="color" />
+        </dd>
+        <dt>自我介绍</dt>
+        <dd>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="请输入自我介绍~~"
+          ></textarea>
+        </dd>
+      </dl>
+      <p>这里面的全都禁用了</p>
+      <input type="text" name="" id="" disabled />
+      <input type="text" name="" id="" disabled />
+      <input type="text" name="" id="" disabled />
+      <input type="text" name="" id="" disabled /><br />
+      <input type="submit" name="" id="" />
+      <input type="reset" name="" id="" />
+    </form>
+    <hr />
+    <table border="1px">
+      <caption>
+        货品列表
+      </caption>
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th style="background-color: red">品名</th>
+          <th>进价</th>
+          <th>出价</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td style="background-color: red">苹果</td>
+          <td rowspan="2">5</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>001</td>
+          <td style="background-color: red">橘子</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>001</td>
+          <td style="background-color: red">香蕉</td>
+          <td>5</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>001</td>
+          <td style="background-color: red">山竹</td>
+          <td>5</td>
+          <td>8</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <div>
+      <img
+        src="images/stock-photo-174778125.jpg"
+        alt="coffee"
+        width="300"
+        height="450"
+        usemap="#coffee-map"
+      />
+      <map name="coffee-map">
+        <area
+          shape="rect"
+          coords="58,104,194,181"
+          href="https://www.mi.com/"
+          alt="mi"
+        />
+        <area shape="circle" coords="130,270,90" href="#page-top" alt="top" />
+        <area
+          shape="polygon"
+          coords="47,78,16,275,165,398,236,259,199,89"
+          href="#page-top"
+          alt="top"
+        />
+      </map>
+    </div>
+    <a href="https://www.mi.com/" target="iframe"
+      >点击我会在下面的frame里打开小米商场，但为什么打不开呢？</a
+    ><br />
+    <iframe src="https://nodejs.org/en/" frameborder="0" name="iframe"></iframe>
+    <div>
+      怎样 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空怎么大呢？
+    </div>
+    <div>怎样在页面中显示以下内容呢？</div>
+    <div>&lt;span>&lt;/span></div>
+  </body>
+</html>
