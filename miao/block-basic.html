@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .tonglan {
+    margin: 15px 20px;
+    min-width: 640px;
+    height: 20px;
+    background-color: orange;
+  }
+
+  .w {
+    width: 640px;
+    margin: 0 auto;
+    /*页面宽度变小时，width在页面里放不下为了满足七个值相加等于盒子实际宽度的公式，margin-right会被重置为负值；*/
+    text-align: center;
+    line-height: 20px;
+  }
+
+  .banner {
+    margin: 0 auto;
+    padding: 15px 0;
+    border: 1px solid #000;
+    width: 600px;
+  }
+
+  .banner div {
+    margin: 10px auto;
+    background-color: pink;
+    height: 35px;
+    width: 540px;
+  }
+
+  .banner div:hover {
+    width: 600px;
+  }
+
+  .banner p {
+    overflow: auto;
+    margin: 0 auto;
+    width: 540px;
+    height: 80px;
+  }
+
+  .r {
+    margin: auto;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-bottom: 50px solid #ffa500;
+  }
+</style>
+
+<body>
+  <div class="tonglan">
+    <div class="w"> Lorem. </div>
+  </div>
+  <div class="banner">
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores iste facilis, maiores, eos consequuntur
+      consequatur quibusdam debitis aliquam quae optio velit voluptatibus facere dolores ratione in sint quisquam est
+      veritatis. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quia eius repellat pariatur ut
+      nulla laborum expedita, blanditiis ipsa atque tempora, ea cupiditate minima commodi omnis vero? Molestias, aperiam
+      labore. </p>
+    <div></div>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque eos sapiente accusantium placeat aperiam
+      repellendus. Odit iure optio molestias ex ipsum velit dicta ut adipisci, eveniet quis nostrum enim expedita! Lorem
+      ipsum, dolor sit amet consectetur adipisicing elit. Sit maxime dolores ad accusamus molestiae veritatis impedit
+      officiis asperiores, libero provident, itaque culpa ex, voluptatem sed id officia ab distinctio quod. </p>
+  </div>
+  <div class="r"></div>
+</body>
+
+</html>
