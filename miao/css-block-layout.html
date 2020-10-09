@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .w {
+      margin: 0 auto;
+      width: 600px;
+    }
+
+    .tonglan {
+      background-color: #000;
+      height: 20px;
+      min-width: 600px;
+    }
+
+    .nav {
+      color: #fff;
+    }
+
+    .tonglan+main {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    main+ul li {
+      box-sizing: border-box;
+      line-height: 33px;
+      text-align: center;
+      list-style: none;
+      width: 180px;
+      height: 40px;
+      border: 3px solid black;
+      background-color: #ffc0cb;
+    }
+
+    main+ul {
+      overflow: hidden;
+    }
+
+    main+ul li:hover {
+      background-color: red;
+      color: greenyellow;
+    }
+
+    main+ul li:nth-child(-n + 8) {
+      margin-right: 30px;
+    }
+
+    main+ul li:not(:nth-child(4n + 4)) {
+      margin-bottom: 15px;
+    }
+
+    main+ul li:nth-child(n + 5):nth-child(-n + 8) {
+      margin-left: 210px;
+    }
+
+    main+ul li:nth-child(n + 9):nth-child(-n + 12) {
+      margin-left: 420px;
+    }
+
+    /* ul li:nth-child(4n + 4) {
+      margin-bottom: -205px;
+    } */
+
+    main+ul li:nth-child(4n + 5) {
+      margin-top: -205px;
+    }
+
+    ul+ul.w {
+      margin: 20px auto;
+    }
+
+    ul+ul li {
+      border-bottom: 1px dotted #000;
+    }
+
+    ul+ul li:last-child {
+      border: 0;
+    }
+
+    footer.tonglan.ft {
+      height: 40px;
+      background-color: #ee8aee;
+      text-align: center;
+      line-height: 19px;
+    }
+  </style>
+</head>
+<div class="tonglan">
+  <div class="nav w">hello world 请调整浏览器窗口大小查看效果</div>
+</div>
+<main class="w">
+  页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
+  页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
+</main>
+<ul class="w">
+  <li>宽180高40(包含边框)</li>
+  <li>水平间隙30px</li>
+  <li>垂直间隙15px</li>
+  <li>边框宽度3px</li>
+  <li>产品</li>
+  <li>产品</li>
+  <li>产品</li>
+  <li>产品</li>
+  <li>产品</li>
+  <li>产品</li>
+  <li>产品</li>
+  <li>产品</li>
+</ul>
+<ul class="w">
+  <li>Link</li>
+  <li>Link</li>
+  <li>Link</li>
+  <li>Link</li>
+  <li>Link</li>
+</ul>
+<footer class="tonglan ft">
+  <div class="copy w">
+    <p>©版权所有</p>
+    <p>本页所有布局均使用块元素</p>
+  </div>
+</footer>
+
+<body>
+
+</body>
+
+</html>
