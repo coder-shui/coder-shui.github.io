@@ -14,15 +14,14 @@
 
   .tonglan {
     margin: 15px 20px;
-    min-width: 640px;
+    min-width: 600px;
     height: 20px;
     background-color: orange;
   }
 
   .w {
-    width: 640px;
+    width: 600px;
     margin: 0 auto;
-    /*页面宽度变小时，width在页面里放不下为了满足七个值相加等于盒子实际宽度的公式，margin-right会被重置为负值；*/
     text-align: center;
     line-height: 20px;
   }
@@ -31,33 +30,40 @@
     margin: 0 auto;
     padding: 15px 0;
     border: 1px solid #000;
-    width: 600px;
+    box-sizing: border-box;
+    max-width: 600px;
   }
 
   .banner div {
-    margin: 10px auto;
+    margin: 15px auto;
     background-color: pink;
     height: 35px;
-    width: 540px;
+    margin: 15px 15px;
   }
 
   .banner div:hover {
-    width: 600px;
+    margin: 15px 0;
   }
 
   .banner p {
     overflow: auto;
     margin: 0 auto;
     width: 540px;
-    height: 80px;
+    height: 4em;
   }
 
-  .r {
-    margin: auto;
+  .r,
+  .b {
+    margin: 0 auto;
     width: 0;
     height: 0;
     border: 50px solid transparent;
     border-bottom: 50px solid #ffa500;
+  }
+
+  .b {
+    border: 50px solid transparent;
+    border-top: 50px solid #ffa500;
   }
 </style>
 
@@ -67,9 +73,7 @@
   </div>
   <div class="banner">
     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores iste facilis, maiores, eos consequuntur
-      consequatur quibusdam debitis aliquam quae optio velit voluptatibus facere dolores ratione in sint quisquam est
-      veritatis. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore quia eius repellat pariatur ut
-      nulla laborum expedita, blanditiis ipsa atque tempora, ea cupiditate minima commodi omnis vero? Molestias, aperiam
+      consequatur quibusdam debitis aliquam quae optio velit voluptatibus facere1
       labore. </p>
     <div></div>
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque eos sapiente accusantium placeat aperiam
@@ -78,6 +82,7 @@
       officiis asperiores, libero provident, itaque culpa ex, voluptatem sed id officia ab distinctio quod. </p>
   </div>
   <div class="r"></div>
+  <div class="b"></div>
 </body>
 
 </html>
