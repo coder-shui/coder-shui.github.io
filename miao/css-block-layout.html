@@ -85,11 +85,11 @@
       margin: 20px auto;
     }
 
-    ul+ul li {
+    .Link li {
       border-bottom: 1px dotted #000;
     }
 
-    ul+ul li:last-child {
+    .Link li:last-child {
       border: 0;
     }
 
@@ -98,6 +98,35 @@
       background-color: #ee8aee;
       text-align: center;
       line-height: 19px;
+    }
+
+    .add {
+      font-size: 0;
+      text-align: center;
+    }
+
+    .add li {
+      display: inline-block;
+      font-size: 16px;
+      line-height: 33px;
+      background-color: #ffc0cb;
+      border: 3px solid #000;
+      box-sizing: border-box;
+      width: 180px;
+      height: 40px;
+    }
+
+    .add li:not(:nth-child(3n + 3)) {
+      margin-right: 30px;
+    }
+
+    .add li:nth-child(-n + 9) {
+      margin-bottom: 15px;
+    }
+
+    .add li:hover {
+      color: lightseagreen;
+      background-color: red;
     }
   </style>
 </head>
@@ -113,16 +142,30 @@
   <li>水平间隙30px</li>
   <li>垂直间隙15px</li>
   <li>边框宽度3px</li>
-  <li>产品</li>
-  <li>产品</li>
-  <li>产品</li>
-  <li>产品</li>
-  <li>产品</li>
-  <li>产品</li>
-  <li>产品</li>
-  <li>产品</li>
+  <li>block</li>
+  <li>block</li>
+  <li>block</li>
+  <li>block</li>
+  <li>block</li>
+  <li>block</li>
+  <li>block</li>
+  <li>block</li>
 </ul>
-<ul class="w">
+<ul class="add w">
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+  <li>inline-block</li>
+</ul>
+<ul class="w Link">
   <li>Link</li>
   <li>Link</li>
   <li>Link</li>
