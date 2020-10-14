@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style: none;
+        transition: 0.2s;
+      }
+      section {
+        margin: auto;
+        width: 1000px;
+        font-size: 0;
+        text-align: center;
+      }
+      section ul {
+        background-color: #000;
+      }
+      section ul > li {
+        position: relative;
+        display: inline-block;
+        padding: 0 15px;
+        font-size: 16px;
+        color: white;
+      }
+      .main li li {
+        box-sizing: border-box;
+        width: 100%;
+      }
+      .main li:hover {
+        background-color: #ccc;
+        box-shadow: 0 0 1px 1px #ccc;
+      }
+      .main > li ul {
+        position: absolute;
+        display: none;
+        width: 300px;
+        top: 0;
+        left: 100%;
+        z-index: 100;
+      }
+      .main li:hover > ul {
+        /*mainl里面的所有li被hover的时候她下面的ul*/
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <ul class="main">
+        <li>
+          Lorem.
+          <ul>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>
+                  red,pink,green,purple
+                  <ul>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                  </ul>
+                </li>
+                <li>
+                  red,pink,green,purple
+                  <ul>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                  </ul>
+                </li>
+                <li>
+                  red,pink,green,purple
+                  <ul>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                  </ul>
+                </li>
+                <li>
+                  red,pink,green,purple
+                  <ul>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                    <li>lorem6</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Lorem.lorem.
+          <ul>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Lorem, ipsum.
+          <ul>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          lo
+          <ul>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Lorem, ipsum dolor.
+          <ul>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Lor.
+          <ul>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+                <li>red,pink,green,purple</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+                <li>Lorem ipsum dolor sit.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </li>
+            <li>
+              Lorem, ipsum dolor.
+              <ul>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+                <li>Lorem.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

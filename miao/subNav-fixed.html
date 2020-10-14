@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      height: 100%;
+    }
+    body {
+      height: 400vh;
+      background-color: #ccc;
+    }
+    li {
+      list-style: none;
+    }
+    .w {
+      position: relative;
+      width: 1200px;
+      height: 100%;
+      margin: 0 auto;
+      background: linear-gradient(to top, yellow, blue, green);
+      background-clip: text;
+      -webkit-background-clip: text;
+      z-index: 1;
+    }
+    .sec01,
+    .sec02,
+    .sec03,
+    .sec04 {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+      left: 0;
+    }
+    .sec01 {
+      top: 0;
+    }
+    .sec02 {
+      top: 100vh;
+    }
+    .sec03 {
+      top: 200vh;
+    }
+    .sec04 {
+      top: 300vh;
+    }
+    .nav1 {
+      position: fixed;
+      top: 50%;
+      left: 20%;
+      color: purple;
+    }
+    .nav2 {
+      position: fixed;
+      top: 50%;
+      left: 20%;
+      color: red;
+    }
+    .nav3 {
+      position: fixed;
+      top: 50%;
+      left: 20%;
+      color: purple;
+    }
+    .nav4 {
+      position: fixed;
+      top: 50%;
+      left: 20%;
+      color: pink;
+    }
+  </style>
+  <body>
+    <main class="w">
+      <div class="sec01">
+        <div class="nav1">
+          <ul>
+            <li>Lorem.</li>
+            <li>Lorem, ipsum.</li>
+            <li>Lorem, ipsum dolor.</li>
+            <li>Lorem ipsum dolor sit.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sec02">
+        <div class="nav2">
+          <ul>
+            <li>Lorem.</li>
+            <li>Lorem, ipsum.</li>
+            <li>Lorem, ipsum dolor.</li>
+            <li>Lorem ipsum dolor sit.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sec03">
+        <div class="nav3">
+          <ul>
+            <li>Lorem.</li>
+            <li>Lorem, ipsum.</li>
+            <li>Lorem, ipsum dolor.</li>
+            <li>Lorem ipsum dolor sit.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sec04">
+        <div class="nav4">
+          <ul>
+            <li>Lorem.</li>
+            <li>Lorem, ipsum.</li>
+            <li>Lorem, ipsum dolor.</li>
+            <li>Lorem ipsum dolor sit.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
