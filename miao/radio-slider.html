@@ -4,92 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="radio-slider.css" />
   </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    main {
-      position: relative;
-      margin: 200px auto;
-      width: 600px;
-      height: 400px;
-    }
-    img {
-      position: absolute;
-      display: none;
-      opacity: 0;
-      width: 100%;
-      z-index: 100;
-    }
-    section input:checked + * + * + * + * + * {
-      display: block;
-      top: 0;
-      left: 0;
-      opacity: 1;
-    }
-    .lb {
-      position: absolute;
-      bottom: 40px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100px;
-      z-index: 1000;
-    }
-    .lb label {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      border-radius: 15px;
-      background-color: rgba(255, 0, 0, 0.5);
-      cursor: pointer;
-      z-index: 2000;
-    }
-  </style>
   <body>
-    <main class="banner">
-      <section>
-        <input type="radio" name="lunbo" id="r1" />
-        <input type="radio" name="lunbo" id="r2" checked />
-        <input type="radio" name="lunbo" id="r3" />
-        <input type="radio" name="lunbo" id="r4" />
-        <input type="radio" name="lunbo" id="r5" />
-
-        <img
-          src="https://travel.12306.cn/imgs/resources/uploadfiles/images/6d77d0ea-53d0-4518-b7e9-e53795b4920c_product_W572_H370.jpg"
-          alt=""
-          class="i1"
-        />
-        <img
-          src="https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg"
-          alt=""
-          class="i2"
-        />
-        <img
-          src="https://travel.12306.cn/imgs/resources/uploadfiles/images/6d77d0ea-53d0-4518-b7e9-e53795b4920c_product_W572_H370.jpg"
-          alt=""
-          class="i3"
-        />
-        <img
-          src="https://travel.12306.cn/imgs/resources/uploadfiles/images/d9ae79de-2f3f-4e9f-ad6e-bdc291dda92a_product_W572_H370.jpg"
-          alt=""
-          class="i4"
-        />
-        <img
-          src="https://travel.12306.cn/imgs/resources/uploadfiles/images/b0c76b21-531b-4af4-a607-cf5672c72ded_product_W572_H370.jpg"
-          alt=""
-          class="i5"
-        />
-        <div class="lb">
-          <label class="r1" for="r1"></label>
-          <label class="r2" for="r2"></label>
-          <label class="r3" for="r3"></label>
-          <label class="r4" for="r4"></label>
-          <label class="r5" for="r5"></label>
+    <section>
+      <input type="radio" name="radio" id="r1" checked />
+      <input type="radio" name="radio" id="r2" />
+      <input type="radio" name="radio" id="r3" />
+      <input type="radio" name="radio" id="r4" />
+      <input type="radio" name="radio" id="r5" />
+      <div class="imgs">
+        <div class="img1">
+          <img src="../img/s1.jpg" alt="" />
+          <label for="r5"> &lt; </label>
+          <label for="r2"> &gt; </label>
         </div>
-      </section>
-    </main>
+        <div class="img2">
+          <img src="../img/s2.jpg" alt="" />
+          <label for="r1">&lt;</label>
+          <label for="r3">&gt;</label>
+        </div>
+        <div class="img3">
+          <img src="../img/s3.jpg" alt="" />
+          <label for="r2">&lt;</label>
+          <label for="r4">&gt;</label>
+        </div>
+        <div class="img4">
+          <img src="../img/s4.jpg" alt="" />
+          <label for="r3">&lt;</label>
+          <label for="r5">&gt;</label>
+        </div>
+        <div class="img5">
+          <img src="../img/s5.jpg" alt="" />
+          <label for="r4">&lt;</label>
+          <label for="r1">&gt;</label>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="btm-slide">
+          <label for="r1"></label>
+          <label for="r2"></label>
+          <label for="r3"></label>
+          <label for="r4"></label>
+          <label for="r5"></label>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

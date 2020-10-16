@@ -9,45 +9,46 @@
         margin: 0;
         padding: 0;
       }
-      li {
-        list-style: none;
-        transition: 0.2s;
-      }
-      section {
-        margin: auto;
-        width: 1000px;
+      .main {
         font-size: 0;
-        text-align: center;
-      }
-      section ul {
         background-color: #000;
+        color: whitesmoke;
       }
-      section ul > li {
+      ul {
+        background-color: #000;
+        list-style: none;
+      }
+      .main > li {
         position: relative;
         display: inline-block;
-        padding: 0 15px;
+        text-align: center;
+        margin: 0 20px;
         font-size: 16px;
-        color: white;
-      }
-      .main li li {
-        box-sizing: border-box;
-        width: 100%;
-      }
-      .main li:hover {
-        background-color: #ccc;
-        box-shadow: 0 0 1px 1px #ccc;
       }
       .main > li ul {
         position: absolute;
         display: none;
+      } /*三层以后的菜单定位时是以这个ul为参考的，此ul代表二级菜单及以下的所有ul，包括
+      下面定位用到的ul，所以下面要相对与ul来定位，不能相对于li，因为如果用li定位的话它的父级
+      参考是自己的ul，而不是上一层ul，我们希望的则是他是相对与上级的ul（或者li）来定位。*/
+      .main > li > ul {
+        top: 100%;
+        left: 0;
+      }
+      .main > li ul li {
         width: 300px;
-        top: 0;
+        /* white-space: nowrap; */
+      }
+      .main > li > ul > li ul {
         left: 100%;
-        z-index: 100;
+        top: 0;
       }
       .main li:hover > ul {
-        /*mainl里面的所有li被hover的时候她下面的ul*/
         display: block;
+      }
+      li:hover {
+        background-color: #ccc;
+        box-shadow: 0 0 1px 1px gray;
       }
     </style>
   </head>
