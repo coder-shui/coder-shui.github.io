@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .w {
+        width: 500px;
+        margin: 100px auto;
+      }
+      section.w {
+        height: 500px;
+        font-size: 0;
+        box-shadow: 0 0 1px 1px red;
+        text-align: center;
+        line-height: 500px;
+      }
+      span {
+        line-height: normal;
+        display: inline-block;
+        font-size: initial;
+        vertical-align: middle;
+        box-shadow: 0 0 1px 1px yellow;
+      }
+      div.w {
+        position: relative;
+        height: 500px;
+        box-shadow: 0 0 1px 1px blue;
+      }
+      em {
+        position: absolute;
+        /* line-height: normal; */
+        line-height: 200px;
+        /* text-decoration: none; */
+        font-style: normal;
+        text-align: center;
+        width: 200px;
+        height: 200px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        box-shadow: 0 0 1px 1px pink;
+      }
+      .table-middle {
+        /* position: absolute;
+        left: 0;
+        right: 0; */
+        display: table-cell;
+        height: 500px;
+        width: 500px;
+        margin: auto;
+        vertical-align: middle;
+        box-shadow: 0 0 1px 1px #000;
+      }
+      .table-middle div {
+        margin: auto;
+        width: 50%;
+        border: 1px solid red;
+      }
+      .table-parent {
+        width: 500px;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="w">
+      <span
+        >行内块 <br />
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias aut
+        laudantium quo quis. Maiores illum, inventore, dignissimos
+        exercitationem obcaecati iusto corrupti fugiat dolor id tempora aliquid
+        voluptatibus saepe! Accusantium, nobis?</span
+      >
+    </section>
+    <div class="w">
+      <em>定位居中</em>
+    </div>
+    <div class="table-parent">
+      <div class="table-middle">
+        <div>
+          表格垂直居中 <br />
+          display:table-cell <br />
+          vertical-align:middle; <br />
+          垂直居中 <br />
+          定宽+水平方向margin为auto <br />
+          水平居中
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
