@@ -1321,6 +1321,25 @@ footer ul li a span.iconfont {
 .side-fixed-nav:hover + .trigger-item {
 display: block;
 }
+.main-rit ul li:last-of-type p:first-of-type{
+  float: right;
+  font-size: 50px;
+  color: #ff6700;
+  margin-right: 20px;
+  margin-top: 20px;
+  font-weight: 700;
+}
+.main-rit ul li:last-of-type p:nth-of-type(2) {
+  display: inline-block;
+  font-size: 16px;
+  color: #333333;
+  margin-top: 45px;
+}
+.main-rit ul li:last-of-type p:nth-of-type(3) {
+  display: inline-block;
+  color: #959595;
+  text-indent: -3em;
+}
 /* .side-fixed-nav ul li:last-of-type{
   position: absolute;
   top: 100%;
@@ -1330,7 +1349,7 @@ display: block;
 
 .side-fixed-nav ul li:last-of-type:hover {
   display: block;
-} */
+} */  
 @media (max-width: 1300px) {
   .side-fixed-nav ul li {
     width: 25px;
