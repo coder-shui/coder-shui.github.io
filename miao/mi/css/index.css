@@ -1233,15 +1233,16 @@ footer ul li a span.iconfont {
 }
 .side-fixed-nav ul {
   position: fixed;
-  bottom: 170px;
+  bottom: 230px;
   right: 0;
   z-index: 10000000;
   border-radius: 3px;
 }
 .side-fixed-nav ul li {
   width: 80px;
-  height: 80px;
+  height: 70px;
   text-align: center;
+  padding-top: 10px;
   background-color: #fff;
   border-bottom: 1px solid #f5f5f5;
   border-top: 1px solid transparent;
@@ -1268,10 +1269,11 @@ footer ul li a span.iconfont {
   content: "扫码领取新人百元礼包";
   position: absolute;
   width: 80px;
-  height: 30px;
+  height: 40px;
   padding: 0 20px;
   padding-top: 120px;
   background-image: url(../images/download.png);
+  background-color: #fff;
   background-position: top center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1282,12 +1284,53 @@ footer ul li a span.iconfont {
   font-size: 14px;
   color: #757575;
 }
-.side-fixed-nav ul li:last-of-type{
+.trigger-item {
+  position: fixed;
+  width: 80px;
+  height: 70px;
+  text-align: center;
+  padding-top: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #f5f5f5;
+  border-top: 1px solid transparent;
+  box-shadow: 0 0 0 1px #f5f5f5;
+  right: 0;
+  bottom: 120px;
+  display: none;
+}
+.trigger-item:hover span {
+  color: #ff6700;
+}
+.trigger-item:hover p {
+  color: #ff6700;
+}
+.trigger-item span {
+  font-size: 40px;
+  color: #999999;
+}
+.trigger-item p {
+  color: #999999;
+  font-size: 16px;
+}
+.trigger:hover ~ .trigger-item {
+  display: block;
+}
+.trigger-item:hover {
+  display: block;
+}
+.side-fixed-nav:hover + .trigger-item {
+display: block;
+}
+/* .side-fixed-nav ul li:last-of-type{
   position: absolute;
   top: 100%;
   left: 0;
   display: none;
 }
+
+.side-fixed-nav ul li:last-of-type:hover {
+  display: block;
+} */
 @media (max-width: 1300px) {
   .side-fixed-nav ul li {
     width: 25px;
@@ -1300,14 +1343,4 @@ footer ul li a span.iconfont {
     font-size: 0px;
     line-height: 0;
   }
-}
-
-.trigger:hover ~ .side-fixed-nav ul li:last-of-type {
-  display: block;
-}
-.side-fixed-nav ul li:last-of-type:hover {
-  display: block;
-}
-.side-fixed-nav ul:hover li:last-of-type {
-  display: block;
 }
