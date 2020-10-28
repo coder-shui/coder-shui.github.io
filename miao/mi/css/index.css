@@ -158,6 +158,7 @@ body {
   /* display: none; */
   overflow: hidden;
   transition: 0.3s;
+  z-index: 11;
 }
 .shopingcar .shopingcar-main em {
   display: inline-block;
@@ -214,6 +215,7 @@ body {
 }
 .serach {
   float: right;
+  position: relative;
 }
 .serach input {
   float: left;
@@ -251,16 +253,53 @@ body {
   font-size: 26px;
   color: #616161;
 }
+.serach input:focus {
+  border-color: #ff6700;
+}
+.serach input:focus ~ button {
+  border-color: #ff6700;
+}
+.hidden-searchlist {
+  position: absolute;
+  padding-left: 1px;
+  width: 243px;
+  top: 100%;
+  left: 0;
+  border: 1px solid #ff6700;
+  border-top: none;
+  background-color: #fff;
+  z-index: 10;
+  display: none;
+}
+.hidden-searchlist li a {
+  display: block;
+  width: 100%;
+  line-height: 30px;
+  font-size: 14px;
+  /* text-align: center; */
+  text-indent: 1em;
+  color: #424242;
+}
+.hidden-searchlist li a:hover {
+  background-color: #fafafa;
+}
+.serach input:focus ~ .hidden-searchlist {
+  display: block;
+}
 /* hiddeen-list -----------------------------------分割线*/
+.nav-list-container {
+  position: relative;
+  width: 100%;
+}
 .hidden {
   position: absolute;
-  top: 240px;
+  top: 100%;
   left: 0;
   min-width: 1226px;
   height: 0;
   padding: 0 16%;
   margin: auto;
-  transition: height 0.1s;
+  transition: height 0.2s, z-index 0.2s;
   background-color: #fff;
   z-index: 100;
   overflow: hidden;
@@ -271,12 +310,14 @@ body {
   padding-top: 30px;
   box-shadow: 0 3px 3px 1px #e0e0e0;
   z-index: 110;
+  transition: z-index 0s, height 0.2s;
   /* display: block; */
 }
 div.banner-nav-list > ul:first-of-type:hover > .lis1 .hidden {
   height: 215px;
   padding-top: 30px;
   box-shadow: 0 3px 1px 0px #e0e0e0;
+  transition: z-index 0s, height 0.2s;
 }
 div.banner-nav-list > ul {
   float: left;
@@ -822,6 +863,7 @@ div.banner-nav-list > ul {
   text-align: center;
   margin-top: 2px;
   /* box-shadow: 0 0 0 1px tomato; */
+  transition: 0.3s;
 }
 .shouji-main ul li a {
   display: block;
@@ -853,35 +895,84 @@ div.banner-nav-list > ul {
   color: #fa6509;
 }
 .home-main {
+  position: relative;
   height: 672px;
 }
 .home-main h4 {
   float: left;
-  height: 50px;
-  line-height: 50px;
+  line-height: 36px;
   font-size: 26px;
   font-weight: normal;
-  /* margin-bottom: 10px; */
   text-align: center;
-  /* border-bottom: 2px solid transparent; */
+  margin-bottom: 20px;
+  border-bottom: 2px solid transparent;
 }
 .home-main h5 {
   float: right;
   position: relative;
-  padding: 0 7px;
-  height: 50px;
-  line-height: 50px;
+  margin: 0 7px;
+  margin-bottom: 20px;
+  line-height: 36px;
   text-align: center;
   font-size: 16px;
   font-weight: normal;
   vertical-align: middle;
-  /* border-bottom: 2px solid transparent; */
-  /* margin-bottom: 10px; */
-}
-.home-btm {
-  clear: both;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s 9999999999s;
 }
 
+.home-main h5:hover {
+  color: tomato;
+  border-color: #ff6700;
+  transition: 0.1s;
+}
+.home-main h5:last-of-type {
+  color: tomato;
+  border-color: #ff6700;
+}
+.home-main h5:not(:last-of-type):hover ~ h5:last-of-type {
+  color: #000;
+  border-color: transparent;
+  transition: none;
+}
+/* 新增hover切换list栏aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */
+.home-btm {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  clear: both;
+  z-index: 1;
+  /* display: none; */
+  transition: z-index 1s 999999999999s;
+}
+.home-main h5:first-of-type:hover ~ .home-btm:first-of-type {
+  z-index: 10;
+  transition: none;
+}
+.home-main h5:nth-of-type(2):hover ~ .home-btm:nth-of-type(2) {
+  z-index: 10;
+  transition: none;
+  /* z-index: 1;
+  transition: none; */
+}
+.home-main h5:nth-of-type(3):hover ~ .home-btm:nth-of-type(3) {
+  z-index: 10;
+  transition: none;
+  /* z-index: 1;
+  transition: none; */
+}
+.home-main h5:first-of-type:hover ~ .home-btm:not(:first-of-type) {
+  z-index: 1;
+  transition: none;
+}
+.home-main h5:nth-of-type(2):hover ~ .home-btm:not(:nth-of-type(2)) {
+  z-index: 1;
+  transition: none;
+}
+.home-main h5:nth-of-type(3):hover ~ .home-btm:not(:nth-of-type(3)) {
+  z-index: 1;
+  transition: none;
+}
 .main-lft {
   float: left;
   width: 234px;
@@ -923,6 +1014,7 @@ div.banner-nav-list > ul {
   /* box-shadow: 0 0 0 1px red; */
   margin-left: 14px;
   margin-top: 2px;
+  /* transition: margin-top .2s, border-bottom 0s, margin-bottom 0s; */
 }
 .main-rit ul li:nth-last-child(-n + 2) {
   width: 234px;
@@ -966,22 +1058,6 @@ div.banner-nav-list > ul {
   box-shadow: 0 5px 5px 3px #ccc;
   margin-top: 0;
   border-bottom: 2px solid transparent;
-}
-.home-main h5:hover::after {
-  /* border-color: tomato; */
-  content: "";
-  position: absolute;
-  display: block;
-  width: 80%;
-  height: 0;
-  top: 40px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  border: 1px solid tomato;
-}
-.home-main h5:hover {
-  color: tomato;
 }
 .btm-video {
   margin-top: 20px;
@@ -1249,12 +1325,14 @@ footer ul li a span.iconfont {
   box-shadow: 0 0 0 1px #f5f5f5;
 }
 .side-fixed-nav ul li span {
-  font-size: 40px;
+  font-size: 32px;
   color: #999999;
+  transition: 0.2s;
 }
 .side-fixed-nav ul li a p {
   color: #999999;
-  font-size: 16px;
+  transition: 0.2s;
+  font-size: 14px;
 }
 .side-fixed-nav ul li:hover span {
   color: #ff6700;
@@ -1265,24 +1343,33 @@ footer ul li a span.iconfont {
 .side-fixed-nav ul li:first-of-type {
   position: relative;
 }
-.side-fixed-nav ul li:first-of-type:hover::before {
+.side-fixed-nav ul li:first-of-type:before {
   content: "扫码领取新人百元礼包";
   position: absolute;
   width: 80px;
   height: 40px;
-  padding: 0 20px;
-  padding-top: 120px;
+  border: 20px solid white;
+  padding-top: 80px;
   background-image: url(../images/download.png);
   background-color: #fff;
   background-position: top center;
   background-size: contain;
   background-repeat: no-repeat;
-  top: 0;
-  left: -120px;
+  background-clip: padding-box;
+  top: 0px;
+  left: 130px;
   transition: 0.1s;
-  border: 1px solid #f5f5f5;
+  outline: 1px solid #f5f5f5;
   font-size: 14px;
   color: #757575;
+  opacity: 0;
+  transition: opacity 0.5s, left 0s;
+  /* display: none; */
+}
+.side-fixed-nav ul li:first-of-type:hover::before {
+  opacity: 1;
+  left: -130px;
+  /* display: block; */
 }
 .trigger-item {
   position: fixed;
@@ -1305,12 +1392,12 @@ footer ul li a span.iconfont {
   color: #ff6700;
 }
 .trigger-item span {
-  font-size: 40px;
+  font-size: 32px;
   color: #999999;
 }
 .trigger-item p {
   color: #999999;
-  font-size: 16px;
+  font-size: 14px;
 }
 .trigger:hover ~ .trigger-item {
   display: block;
@@ -1319,9 +1406,9 @@ footer ul li a span.iconfont {
   display: block;
 }
 .side-fixed-nav:hover + .trigger-item {
-display: block;
+  display: block;
 }
-.main-rit ul li:last-of-type p:first-of-type{
+.main-rit ul li:last-of-type p:first-of-type {
   float: right;
   font-size: 50px;
   color: #ff6700;
@@ -1349,7 +1436,7 @@ display: block;
 
 .side-fixed-nav ul li:last-of-type:hover {
   display: block;
-} */  
+} */
 @media (max-width: 1300px) {
   .side-fixed-nav ul li {
     width: 25px;
@@ -1360,6 +1447,17 @@ display: block;
   }
   .side-fixed-nav ul li a p {
     font-size: 0px;
+    line-height: 0;
+  }
+  .trigger-item {
+    width: 25px;
+    height: 25px;
+  }
+  .trigger-item a span {
+    font-size: 16px;
+  }
+  .trigger-item a p {
+    font-size: 0;
     line-height: 0;
   }
 }
