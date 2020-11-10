@@ -1,0 +1,429 @@
+<meta charset="UTF-8" />
+<script xtype="norun" id="ch0103/01">
+  console.log(Number(prompt("a")) + Number(prompt("b")));
+</script>
+<script xtype="norun" id="ch0103/02">
+  console.log(
+    (Number(prompt("a")) + Number(prompt("b"))) * Number(prompt("c"))
+  );
+</script>
+<script xtype="norun" id="ch0103/03">
+  console.log(
+    (Number(prompt("a")) + Number(prompt("b"))) / Number(prompt("c"))
+  );
+</script>
+<script xtype="norun" id="ch0103/04">
+  var a = Number(prompt("a"));
+  var b = Number(prompt("b"));
+  console.log(Math.floor(a / b), a % b);
+</script>
+<script xtype="norun" id="ch0103/05">
+  var a = Number(prompt("a"));
+  var b = Number(prompt("b"));
+  var num = a / b;
+  console.log(num.toFixed(9));
+</script>
+<script xtype="norun" id="ch0103/06">
+  var a = Number(prompt("a"));
+  var b = Number(prompt("b"));
+  var num = b / a;
+  console.log(num.toFixed(3) + "%");
+</script>
+<script xtype="norun" id="ch0103/07">
+  var a = Number(prompt("a"));
+  var b = Number(prompt("b"));
+  var c = Number(prompt("c"));
+  var d = Number(prompt("d"));
+  var x = Number(prompt("x"));
+  var num = a * x * x * x + b * x * x + c * x + d;
+  console.log(num.toFixed(7));
+</script>
+<script xtype="norun" id="ch0103/08">
+  var f = Number(prompt("f"));
+  var num = ((f - 32) * 5) / 9;
+  console.log(num.toFixed(5));
+</script>
+<script xtype="norun" id="ch0103/09">
+  var r = Number(prompt("r"));
+  var pi = 3.14159;
+  console.log(
+    (r * 2).toFixed(4),
+    (2 * pi * r).toFixed(4),
+    (pi * r * r).toFixed(4)
+  );
+</script>
+<script xtype="norun" id="ch0103/10">
+  var r1 = Number(prompt("r1"));
+  var r2 = Number(prompt("r2"));
+  console.log((1 / (1 / r1 + 1 / r2)).toFixed(2));
+</script>
+<script xtype="norun" id="ch0103/11">
+  var r1 = Number(prompt("r1"));
+  var r2 = Number(prompt("r2"));
+  console.log(r1 / r2 - Math.floor(r1 / r2));
+</script>
+<script xtype="norun" id="ch0103/12">
+  var r = Number(prompt("r"));
+  var pi = 3.14;
+  console.log(((4 / 3) * pi * r * r * r).toFixed(2));
+</script>
+<script xtype="norun" id="ch0103/13">
+  var r = Number(prompt("r"));
+  var a = Math.floor(r / 100);
+  var b = Math.floor((r - a * 100) / 10);
+  var c = r - a * 100 - b * 10;
+  console.log(c + "" + b + a.toString());
+</script>
+<script xtype="norun" id="ch0103/14">
+  var h = Number(prompt("h"));
+  var r = Number(prompt("r"));
+  var pi = 3.14159;
+  var m = (pi * r * r * h) / 1000;
+  console.log(Math.ceil(20 / m));
+</script>
+<script xtype="norun" id="ch0103/15">
+  var n = Number(prompt("n"));
+  var x = Number(prompt("x"));
+  var y = Number(prompt("y"));
+  var r = n - Math.ceil(y / x);
+  console.log(r);
+</script>
+<script xtype="norun" id="ch0103/16">
+  var xa = Number(prompt("xa"));
+  var ya = Number(prompt("ya"));
+  var xb = Number(prompt("xb"));
+  var yb = Number(prompt("yb"));
+  var len = Math.sqrt(
+    Math.abs(xa - ya) * Math.abs(xa - ya) +
+      Math.abs(xb - yb) * Math.abs(xb - yb)
+  );
+  console.log(len.toFixed(3));
+</script>
+<script xtype="norun" id="ch0103/17">
+  var xa = Number(prompt("xa"));
+  var xb = Number(prompt("xb"));
+  var ya = Number(prompt("ya"));
+  var yb = Number(prompt("yb"));
+  var za = Number(prompt("za"));
+  var zb = Number(prompt("zb"));
+  var s = (xa * yb - xa * zb + ya * zb - ya * xb + za * xb - ya * yb) / 2;
+  console.log(s.toFixed(2));
+</script>
+<script xtype="norun" id="ch0103/18">
+  var a1 = Number(prompt("a1"));
+  var a2 = Number(prompt("a2"));
+  var n = Number(prompt("n"));
+  var diff = a2 - a1;
+  var num = a1 + (n - 1) * diff;
+  console.log(num);
+</script>
+<script xtype="norun" id="ch0103/19">
+  var a = Number(prompt("a1"));
+  var b = Number(prompt("a2"));
+  var num = a * b;
+  console.log(num);
+</script>
+<script xtype="norun" id="ch0103/20">
+  var n = Number(prompt("n"));
+  var num = 1;
+  for (let i = 0; i < n; i++) {
+    num *= 2;
+  }
+  console.log(num);
+</script>
+<!-- //分割线------------------------------------------------------------------------------- -->
+<script xtype="norun" id="ch0104/01">
+  var n = Number(prompt("n"));
+  while (n % 1 !== 0) {
+    n = prompt("请输入整数");
+  }
+  if (n > 0) {
+    console.log("positive");
+  } else if (n == 0) {
+    console.log("zero");
+  } else {
+    console.log("negative");
+  }
+</script>
+<script xtype="norun" id="ch0104/02">
+  var n = Number(prompt("n"));
+  console.log(Math.abs(n));
+</script>
+<script xtype="norun" id="ch0104/03">
+  var n = Number(prompt("n"));
+  while (n % 1 !== 0 || n <= 0) {
+    n = prompt("请输入正整数");
+  }
+  if (n % 2 == 0) {
+    console.log("even");
+  } else {
+    console.log("odd");
+  }
+</script>
+<script xtype="norun" id="ch0104/04">
+  var n = prompt("n");
+  while (isNaN(n) !== true) {
+    n = prompt("请输入一个字符");
+  }
+  if (n.charCodeAt(0) % 2 !== 0) {
+    console.log("Yes");
+  } else {
+    console.log("no no no");
+  }
+</script>
+<script xtype="norun" id="ch0104/05">
+  var x = Number(prompt("x"));
+  var y = Number(prompt("y"));
+  while (x % 1 !== 0 || y % 1 !== 0) {
+    x = Number(prompt("请输入整数"));
+    y = Number(prompt("请输入整数"));
+  }
+  if (x > y) {
+    console.log(">");
+  } else if (x == y) {
+    console.log("=");
+  } else {
+    console.log("<");
+  }
+</script>
+<script xtype="norun" id="ch0104/06">
+  var x = Number(prompt("x"));
+  while (x % 1 !== 0 || x < 0 || x > 1000) {
+    x = Number(prompt("请输入不超过1000的正整数"));
+  }
+  if (x > 10 && x < 100) {
+    console.log("1");
+  } else {
+    console.log("0");
+  }
+</script>
+<script xtype="norun" id="ch0104/07">
+  var x = Number(prompt("lucky"));
+  var y = Number(prompt("inspire"));
+  while (x % 1 !== 0 || x < 0 || y % 1 !== 0 || y < 0) {
+    x = Number(prompt("请输入大于等于0的整数"));
+    y = Number(prompt("请输入大于等于0的整数"));
+  }
+  if (x > 10 || y > 20) {
+    console.log("1");
+  } else {
+    console.log("0");
+  }
+</script>
+<script xtype="norun" id="ch0104/08">
+  var x = Number(prompt("lucky"));
+  while (x % 1 !== 0) {
+    x = Number(prompt("请输入整数"));
+  }
+  if (x % 3 == 0 && x % 5 == 0) {
+    console.log("yes");
+  } else {
+    console.log("no");
+  }
+</script>
+<script xtype="norun" id="ch0104/09">
+  var x = Number(prompt("lucky"));
+  while (x % 1 !== 0) {
+    x = Number(prompt("请输入整数"));
+  }
+  if (x % 3 == 0 && x % 5 == 0 && x % 7 == 0) {
+    console.log("3 5 7");
+  } else if (x % 3 == 0 && x % 5 == 0) {
+    console.log("3 5");
+  } else if (x % 3 == 0 && x % 7 == 0) {
+    console.log("3 7");
+  } else if (x % 7 == 0 && x % 5 == 0) {
+    console.log("5 7");
+  } else if (x % 3 == 0) {
+    console.log("3");
+  } else if (x % 5 == 0) {
+    console.log("5");
+  } else if (x % 7 == 0) {
+    console.log("7");
+  } else {
+    console.log("n");
+  }
+</script>
+<script xtype="norun" id="ch0104/10">
+  var x = Number(prompt("lucky-x"));
+  var y = Number(prompt("lucky-y"));
+  while (x % 1 !== 0 || y % 1 !== 0 || x < 0 || y < 0 || x > 100 || y > 100) {
+    x = Number(prompt("请输入0-100的整数x"));
+    y = Number(prompt("请输入0-100的整数y"));
+  }
+  if ((x < 60 && y >= 60) || (x >= 60 && y < 60)) {
+    console.log("1");
+  } else {
+    console.log("0");
+  }
+</script>
+<script xtype="norun" id="ch0104/11">
+  var x = Number(prompt("lucky-x"));
+  while (x % 1 !== 0 || x > 7 || x < 1) {
+    x = Number(prompt("请输入0-7的整数x"));
+  }
+  if (x % 2 == 0 || x == 7) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+</script>
+<script xtype="norun" id="ch0104/12">
+  var x = Number(prompt("meters"));
+  while (x % 1 !== 0) {
+    x = Number(prompt("请输入整数x"));
+  }
+  if (x / 3 + 27 + 23 < x / 1.2) {
+    console.log("Bike");
+  } else if (x / 3 + 27 + 23 == x / 1.2) {
+    console.log("All");
+  } else {
+    console.log("Walk");
+  }
+</script>
+<script xtype="norun" id="ch0104/13">
+  var x = Number(prompt("weight"));
+  while (x < 0 || x >= 20) {
+    x = Number(prompt("请输入大于等于0小于20的数x"));
+  }
+  if (x >= 0 && x < 5) {
+    console.log(2.5 - x);
+  } else if (x >= 5 && x < 10) {
+    console.log(2 - 1.5 * (x - 3) * (x - 3));
+  } else {
+    console.log(x / 2 - 1.5);
+  }
+</script>
+<script xtype="norun" id="ch0104/14">
+  var x = Number(prompt("weight"));
+  var y = prompt("emergency");
+  while (x % 1 !== 0 || (y !== "y" && y !== "n")) {
+    x = Number(prompt("请输入整数x"));
+    y = prompt("请输入y或x");
+  }
+  if (x > 1000 && y == "y") {
+    console.log(Math.ceil((x % 1000) / 500) * 4 + 8 + 5);
+  } else if (x > 1000 && y == "n") {
+    console.log(Math.ceil((x % 1000) / 500) * 4 + 8);
+  } else if (x < 1000 && y == "y") {
+    console.log(8 + 5);
+  } else if (x < 1000 && y == "n") {
+    console.log(8);
+  }
+</script>
+<script xtype="norun" id="ch0104/15">
+  var x = Number(prompt("x"));
+  var y = Number(prompt("y"));
+  var z = Number(prompt("z"));
+  while (x % 1 !== 0 || y % 1 !== 0 || z % 1 !== 0) {
+    x = Number(prompt("请输入整数x"));
+    y = Number(prompt("请输入整数y"));
+    z = Number(prompt("请输入整数z"));
+  }
+  if (x > y && x > z) {
+    console.log(x);
+  } else if (y > x && y > z) {
+    console.log(y);
+  } else {
+    console.log(z);
+  }
+</script>
+<script xtype="norun" id="ch0104/16">
+  var x = Number(prompt("x"));
+  var y = Number(prompt("y"));
+  var z = Number(prompt("z"));
+  while (
+    x % 1 !== 0 ||
+    y % 1 !== 0 ||
+    z % 1 !== 0 ||
+    x <= 0 ||
+    y <= 0 ||
+    z <= 0
+  ) {
+    x = Number(prompt("请输入正整数x"));
+    y = Number(prompt("请输入正整数y"));
+    z = Number(prompt("请输入正整数z"));
+  }
+  if (x + y > z && x + z > y && y + z > x) {
+    console.log("yes");
+  }
+</script>
+<script xtype="norun" id="ch0104/17">
+  var x = Number(prompt("year"));
+  while (x % 1 !== 0 || x <= 0 || x >= 3000) {
+    x = Number(prompt("请输入0-3000的整数x"));
+  }
+  if (x % 400 == 0 || (x % 4 == 0 && x % 100 !== 0)) {
+    console.log("Y");
+  } else {
+    console.log("N");
+  }
+</script>
+<script xtype="norun" id="ch0104/18">
+  var x = Number(prompt("X"));
+  var Y = Number(prompt("Y"));
+  while (x % 1 !== 0 || y % 1 !== 0) {
+    x = Number(prompt("请输入整数x"));
+    y = Number(prompt("请输入整数y"));
+  }
+  if (x >= -1 && x <= 1 && y >= -1 && y <= 1) {
+    console.log("yes");
+  } else {
+    console.log("no");
+  }
+</script>
+<script xtype="norun" id="ch0104/19">
+  var x = Number(prompt("X"));
+  var Y = Number(prompt("Y"));
+  var o = prompt("operator");
+  while (x % 1 !== 0 || y % 1 !== 0) {
+    x = Number(prompt("请输入整数x"));
+    y = Number(prompt("请输入整数y"));
+  }
+  if (o !== "+" && o !== "-" && o !== "*" && o !== "/") {
+    console.log("Invalid operator!");
+  } else if (o == "/" && y == 0) {
+    console.log("Divided by zero!");
+  } else if (o == "+") {
+    console.log(x + y);
+  } else if (o == "-") {
+    console.log(x - y);
+  } else if (o == "*") {
+    console.log(x * y);
+  } else if (o == "/") {
+    console.log(x / y);
+  }
+</script>
+<script xtype="norun" id="ch0104/20">
+  var a = Number(prompt("a"));
+  var b = Number(prompt("b"));
+  var c = Number(prompt("c"));
+  var delta = b * b - 4 * a * c;
+  if (delta == 0) {
+    console.log("x1 = x2 =" + -b / (2 * a));
+  } else if (delta > 0) {
+    console.log("x1 = " + (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a)) +
+      "\n" +
+      "x2 = " +
+      (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+  } else {
+    var s = -b / (2 * a);
+    var x = Math.sqrt(4 * a * c - b * b) / (2 * a);
+    var x1s = s.toFixed(5);
+    var x1x = x.toFixed(5);
+    console.log(
+      "x1 = " + x1s + "+" + x1x + "i;" + "x2 = " + x1s + "-" + x1x + "i"
+    );
+  }
+</script>
+<script xtype="norun" id="ch0104/21">
+  var n = Number(prompt("n"));
+  var x = Number(prompt("x"));
+  var y = Number(prompt("y"));
+  while (n % 1 !== 0 || x % 1 !== 0 || y % 1 !== 0) {
+    n = Number(prompt("请输入整数n"));
+    x = Number(prompt("请输入整数x"));
+    y = Number(prompt("请输入整数y"));
+  }
+  console.log(n - Math.ceil(y / x));
+</script>
