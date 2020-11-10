@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  position: absolute;
+  width: 180px;
+  height: 37px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+button[aria-label] {
+  position: relative;
+  width: 180px;
+  height: 37px;
+  background-color: #b71212;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+}
+/* 初始状态 */
+[aria-label]::before {
+  content: attr(aria-label);
+  box-sizing: border-box;
+  position: absolute;
+  max-width: 40%;
+  /* transform-box: fill-box; */
+  padding: 0.4em;
+  text-align: center;
+  background-color: #1c1812;
+  word-wrap: break-word;
+  word-break: break-all;
+  top: 50%;
+  left: 50%;
+  border-radius: 2px;
+  z-index: 10;
+  transition: 0.3s;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+[aria-label]::after {
+  content: "";
+  position: absolute;
+  border: 6px solid transparent;
+  top: 50%;
+  left: 50%;
+  z-index: 11;
+  transition: 0.3s;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+[aria-label]:not([data-balloon-pos])::before {
+  transform: translate(-50%, -50%) translateY(calc(-50% - 24px));
+}
+[aria-label]:not([data-balloon-pos])::after {
+  border-top-color: #1c1812;
+  transform: translate(-50%, -50%) translateY(-18.5px);
+}
+[aria-label]:not([data-balloon-pos]):hover::after {
+  transform: translate(-50%, -50%) translateY(-28.5px);
+  opacity: 1;
+}
+[aria-label]:not([data-balloon-pos]):hover::before {
+  transform: translate(-50%, -50%) translateY(calc(-50% - 34px));
+  opacity: 1;
+}
+/* up */
+[data-balloon-pos="up"]::before {
+  transform: translate(-50%, -50%) translateY(calc(-50% - 24px));
+}
+[data-balloon-pos="up"]::after {
+  border-top-color: #1c1812;
+  transform: translate(-50%, -50%) translateY(-18.5px);
+}
+[data-balloon-pos="up"]:hover::after {
+  transform: translate(-50%, -50%) translateY(-28.5px);
+  opacity: 1;
+}
+[data-balloon-pos="up"]:hover::before {
+  transform: translate(-50%, -50%) translateY(calc(-50% - 34px));
+  opacity: 1;
+}
+
+[data-balloon-pos="down"]::before {
+  transform: translate(-50%, -50%) translateY(calc(50% + 24px));
+}
+[data-balloon-pos="down"]::after {
+  border-bottom-color: #1c1812;
+  transform: translate(-50%, -50%) translateY(18.5px);
+}
+[data-balloon-pos="down"]:hover::after {
+  transform: translate(-50%, -50%) translateY(28.5px);
+  opacity: 1;
+}
+[data-balloon-pos="down"]:hover::before {
+  transform: translate(-50%, -50%) translateY(calc(50% + 34px));
+  opacity: 1;
+}
+
+[data-balloon-pos="left"]::before {
+  transform: translate(-50%, -50%) translateX(calc(-50% - 96px));
+  /* opacity: 1; */
+}
+[data-balloon-pos="left"]::after {
+  border-left-color: #1c1812;
+  transform: translate(-50%, -50%) translateX(-90px);
+  /* opacity: 1; */
+}
+[data-balloon-pos="left"]:hover::before {
+  transform: translate(-50%, -50%) translateX(calc(-50% - 106px));
+  opacity: 1;
+}
+[data-balloon-pos="left"]:hover::after {
+  transform: translate(-50%, -50%) translateX(-100px);
+  opacity: 1;
+}
+
+[data-balloon-pos="right"]::before {
+  transform: translate(-50%, -50%) translateX(calc(50% + 96px));
+  /* opacity: 1; */
+}
+[data-balloon-pos="right"]::after {
+  border-right-color: #1c1812;
+  transform: translate(-50%, -50%) translateX(90px);
+  /* opacity: 1; */
+}
+[data-balloon-pos="right"]:hover::before {
+  transform: translate(-50%, -50%) translateX(calc(50% + 106px));
+  opacity: 1;
+}
+[data-balloon-pos="right"]:hover::after {
+  transform: translate(-50%, -50%) translateX(100px);
+  opacity: 1;
+}
+[data-balloon-pos="up-left"]::before {
+  transform: translate(calc(-50% - 54px), -50%) translateY(calc(-50% - 24px));
+}
+[data-balloon-pos="up-left"]::after {
+  border-top-color: #1c1812;
+  transform: translate(calc(-50% - 54px), -50%) translateY(-18.5px);
+}
+[data-balloon-pos="up-left"]:hover::before {
+  transform: translate(calc(-50% - 54px), -50%) translateY(calc(-50% - 34px));
+  opacity: 1;
+}
+[data-balloon-pos="up-left"]:hover::after {
+  transform: translate(calc(-50% - 54px), -50%) translateY(-28.5px);
+  opacity: 1;
+}
+
+[data-balloon-pos="up-right"]::before {
+  transform: translate(calc(-50% + 54px), -50%) translateY(calc(-50% - 24px));
+}
+[data-balloon-pos="up-right"]::after {
+  border-top-color: #1c1812;
+  transform: translate(calc(-50% + 54px), -50%) translateY(-18.5px);
+}
+[data-balloon-pos="up-right"]:hover::before {
+  transform: translate(calc(-50% + 54px), -50%) translateY(calc(-50% - 34px));
+  opacity: 1;
+}
+[data-balloon-pos="up-right"]:hover::after {
+  transform: translate(calc(-50% + 54px), -50%) translateY(-28.5px);
+  opacity: 1;
+}
+
+[data-balloon-pos="down-left"]::before {
+  transform: translate(calc(-50% - 54px), -50%) translateY(calc(50% + 24px));
+}
+[data-balloon-pos="down-left"]::after {
+  border-bottom-color: #1c1812;
+  transform: translate(calc(-50% - 54px), -50%) translateY(18.5px);
+}
+[data-balloon-pos="down-left"]:hover::before {
+  transform: translate(calc(-50% - 54px), -50%) translateY(calc(50% + 34px));
+  opacity: 1;
+}
+[data-balloon-pos="down-left"]:hover::after {
+  transform: translate(calc(-50% - 54px), -50%) translateY(28.5px);
+  opacity: 1;
+}
+
+[data-balloon-pos="down-right"]::before {
+  transform: translate(calc(-50% + 54px), -50%) translateY(calc(50% + 24px));
+}
+[data-balloon-pos="down-right"]::after {
+  border-bottom-color: #1c1812;
+  transform: translate(calc(-50% + 54px), -50%) translateY(18.5px);
+}
+[data-balloon-pos="down-right"]:hover::before {
+  transform: translate(calc(-50% + 54px), -50%) translateY(calc(50% + 34px));
+  opacity: 1;
+}
+[data-balloon-pos="down-right"]:hover::after {
+  transform: translate(calc(-50% + 54px), -50%) translateY(28.5px);
+  opacity: 1;
+}
+
+[data-balloon-length="medium"]::before {
+  min-width: 80%;
+}
+[data-balloon-length="large"]::before {
+  min-width: 140%;
+}
+
+[data-balloon-length="xlarge"]::before {
+  min-width: 200%;
+}
+[data-balloon-length="fit"]::before {
+  min-width: 100%;
+}
+
+[data-balloon-length="large"][data-balloon-pos="up-left"]::before,
+[data-balloon-length="xlarge"][data-balloon-pos="up-left"]::before,
+[data-balloon-length="fit"][data-balloon-pos="up-left"]::before {
+  left: 0;
+  right: auto;
+  transform: translate(0, -50%) translateY(calc(-50% - 24px));
+}
+[data-balloon-length="large"][data-balloon-pos="up-left"]:hover::before,
+[data-balloon-length="xlarge"][data-balloon-pos="up-left"]:hover::before,
+[data-balloon-length="fit"][data-balloon-pos="up-left"]:hover::before {
+  transform: translate(0, -50%) translateY(calc(-50% - 34px));
+}
+[data-balloon-length="large"][data-balloon-pos="up-right"]::before,
+[data-balloon-length="xlarge"][data-balloon-pos="up-right"]::before,
+[data-balloon-length="fit"][data-balloon-pos="up-right"]::before {
+  right: 0;
+  left: auto;
+  transform: translate(0, -50%) translateY(calc(-50% - 24px));
+}
+[data-balloon-length="large"][data-balloon-pos="up-right"]:hover::before,
+[data-balloon-length="xlarge"][data-balloon-pos="up-right"]:hover::before,
+[data-balloon-length="fit"][data-balloon-pos="up-right"]:hover::before {
+  transform: translate(0, -50%) translateY(calc(-50% - 34px));
+}
+
+[data-balloon-length="large"][data-balloon-pos="down-left"]::before,
+[data-balloon-length="xlarge"][data-balloon-pos="down-left"]::before,
+[data-balloon-length="fit"][data-balloon-pos="down-left"]::before {
+  right: auto;
+  left: 0;
+  transform: translate(0, -50%) translateY(calc(50% + 24px));
+}
+[data-balloon-length="large"][data-balloon-pos="down-left"]:hover::before,
+[data-balloon-length="xlarge"][data-balloon-pos="down-left"]:hover::before,
+[data-balloon-length="fit"][data-balloon-pos="down-left"]:hover::before {
+  transform: translate(0, -50%) translateY(calc(50% + 34px));
+}
+
+[data-balloon-length="large"][data-balloon-pos="down-right"]::before,
+[data-balloon-length="xlarge"][data-balloon-pos="down-right"]::before,
+[data-balloon-length="fit"][data-balloon-pos="down-right"]::before {
+  right: 0;
+  left: auto;
+  transform: translate(0, -50%) translateY(calc(50% + 24px));
+}
+[data-balloon-length="large"][data-balloon-pos="down-right"]:hover::before,
+[data-balloon-length="xlarge"][data-balloon-pos="down-right"]:hover::before,
+[data-balloon-length="fit"][data-balloon-pos="down-right"]:hover::before {
+  transform: translate(0, -50%) translateY(calc(50% + 34px));
+}
+[aria-label="No animation!"]::before,
+[aria-label="No animation!"]::after {
+  transition: 0s;
+}

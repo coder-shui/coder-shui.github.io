@@ -9,7 +9,9 @@
 </script>
 <script xtype="norun" id="ch0103/03">
   console.log(
-    (Number(prompt("a")) + Number(prompt("b"))) / Number(prompt("c"))
+    Math.floor(
+      (Number(prompt("a")) + Number(prompt("b"))) / Number(prompt("c"))
+    )
   );
 </script>
 <script xtype="norun" id="ch0103/04">
@@ -30,11 +32,11 @@
   console.log(num.toFixed(3) + "%");
 </script>
 <script xtype="norun" id="ch0103/07">
+  var x = Number(prompt("x"));
   var a = Number(prompt("a"));
   var b = Number(prompt("b"));
   var c = Number(prompt("c"));
   var d = Number(prompt("d"));
-  var x = Number(prompt("x"));
   var num = a * x * x * x + b * x * x + c * x + d;
   console.log(num.toFixed(7));
 </script>
@@ -94,8 +96,8 @@
   var xb = Number(prompt("xb"));
   var yb = Number(prompt("yb"));
   var len = Math.sqrt(
-    Math.abs(xa - ya) * Math.abs(xa - ya) +
-      Math.abs(xb - yb) * Math.abs(xb - yb)
+    Math.abs(xa - xb) * Math.abs(xa - xb) +
+      Math.abs(ya - yb) * Math.abs(ya - yb)
   );
   console.log(len.toFixed(3));
 </script>
@@ -166,9 +168,9 @@
     n = prompt("请输入一个字符");
   }
   if (n.charCodeAt(0) % 2 !== 0) {
-    console.log("Yes");
+    console.log("YES");
   } else {
-    console.log("no no no");
+    console.log("NO");
   }
 </script>
 <script xtype="norun" id="ch0104/05">
@@ -216,11 +218,12 @@
     x = Number(prompt("请输入整数"));
   }
   if (x % 3 == 0 && x % 5 == 0) {
-    console.log("yes");
+    console.log("YES");
   } else {
-    console.log("no");
+    console.log("NO");
   }
 </script>
+
 <script xtype="norun" id="ch0104/09">
   var x = Number(prompt("lucky"));
   while (x % 1 !== 0) {
@@ -287,11 +290,11 @@
     x = Number(prompt("请输入大于等于0小于20的数x"));
   }
   if (x >= 0 && x < 5) {
-    console.log(2.5 - x);
+    console.log((2.5 - x).toFixed(3));
   } else if (x >= 5 && x < 10) {
-    console.log(2 - 1.5 * (x - 3) * (x - 3));
+    console.log(2 - 1.5 * (x - 3) * (x - 3).toFixed(3));
   } else {
-    console.log(x / 2 - 1.5);
+    console.log((x / 2 - 1.5).toFixed(3));
   }
 </script>
 <script xtype="norun" id="ch0104/14">
@@ -361,7 +364,7 @@
 </script>
 <script xtype="norun" id="ch0104/18">
   var x = Number(prompt("X"));
-  var Y = Number(prompt("Y"));
+  var y = Number(prompt("Y"));
   while (x % 1 !== 0 || y % 1 !== 0) {
     x = Number(prompt("请输入整数x"));
     y = Number(prompt("请输入整数y"));
@@ -372,9 +375,10 @@
     console.log("no");
   }
 </script>
+
 <script xtype="norun" id="ch0104/19">
   var x = Number(prompt("X"));
-  var Y = Number(prompt("Y"));
+  var y = Number(prompt("Y"));
   var o = prompt("operator");
   while (x % 1 !== 0 || y % 1 !== 0) {
     x = Number(prompt("请输入整数x"));
@@ -411,11 +415,10 @@
     var x = Math.sqrt(4 * a * c - b * b) / (2 * a);
     var x1s = s.toFixed(5);
     var x1x = x.toFixed(5);
-    console.log(
-      "x1 = " + x1s + "+" + x1x + "i;" + "x2 = " + x1s + "-" + x1x + "i"
-    );
+    console.log("x1=" + x1s + "+" + x1x + "i;" + "x2=" + x1s + "-" + x1x + "i");
   }
 </script>
+
 <script xtype="norun" id="ch0104/21">
   var n = Number(prompt("n"));
   var x = Number(prompt("x"));

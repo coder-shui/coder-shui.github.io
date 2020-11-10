@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Css clock</title>
+    <style>
+      body {
+        background-color: #ccc;
+      }
+      .box {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 401px;
+        height: 401px;
+        padding: 25px;
+        box-shadow: 0 0 0 3px white;
+        background-color: black;
+        clip-path: circle(46%);
+        transition: .2s linear;
+        z-index: 8;
+      }
+      .box-mask {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 401px;
+        height: 401px;
+        border: 5px solid rgba(204, 204, 204, 0.3);
+        border-radius: 50%;
+        box-shadow: 1px 1px 2px 2px gray;
+        z-index: 1000;
+      }
+      input:checked ~ .box {
+        clip-path: circle(100%);
+        background-color: sienna;
+      }
+      .box span {
+        position: absolute;
+        width: 401px;
+        height: 401px;
+      }
+      .box span::before {
+        content: "";
+        position: absolute;
+        width: 401px;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          tan,
+          tan 20px,
+          transparent 20px,
+          transparent 380px,
+          tan 20px
+        );
+        top: 200px;
+      }
+      .box span::after {
+        content: "";
+        left: 200px;
+        position: absolute;
+        width: 1px;
+        height: 401px;
+        background-image: linear-gradient(
+          to bottom,
+          tan,
+          tan 20px,
+          transparent 20px,
+          transparent 380px,
+          tan 20px
+        );
+      }
+      .box span:nth-child(1)::after {
+        width: 1.5px;
+      }
+      .box span:nth-child(2) {
+        transform: rotate(6deg);
+      }
+      .box span:nth-child(3) {
+        transform: rotate(12deg);
+      }
+      .box span:nth-child(4) {
+        transform: rotate(18deg);
+      }
+      .box span:nth-child(5) {
+        transform: rotate(24deg);
+      }
+      .box span:nth-child(6) {
+        transform: rotate(30deg);
+      }
+      .box span:nth-child(7) {
+        transform: rotate(36deg);
+      }
+      .box span:nth-child(8) {
+        transform: rotate(42deg);
+      }
+      .box span:nth-child(9) {
+        transform: rotate(48deg);
+      }
+      .box span:nth-child(10) {
+        transform: rotate(54deg);
+      }
+      .box span:nth-child(11) {
+        transform: rotate(60deg);
+      }
+      .box span:nth-child(12) {
+        transform: rotate(66deg);
+      }
+      .box span:nth-child(13) {
+        transform: rotate(72deg);
+      }
+      .box span:nth-child(14) {
+        transform: rotate(78deg);
+      }
+      .box span:nth-child(15) {
+        transform: rotate(84deg);
+      }
+      .box span:nth-child(2)::before,
+      .box span:nth-child(3)::before,
+      .box span:nth-child(4)::before,
+      .box span:nth-child(5)::before,
+      .box span:nth-child(7)::before,
+      .box span:nth-child(8)::before,
+      .box span:nth-child(9)::before,
+      .box span:nth-child(10)::before,
+      .box span:nth-child(12)::before,
+      .box span:nth-child(13)::before,
+      .box span:nth-child(14)::before,
+      .box span:nth-child(15)::before {
+        background-image: linear-gradient(
+          to right,
+         #ccc,
+          #ccc 10px,
+          transparent 10px,
+          transparent 390px,
+          #ccc 10px
+        );
+      }
+      .box span:nth-child(2)::after,
+      .box span:nth-child(3)::after,
+      .box span:nth-child(4)::after,
+      .box span:nth-child(5)::after,
+      .box span:nth-child(7)::after,
+      .box span:nth-child(8)::after,
+      .box span:nth-child(9)::after,
+      .box span:nth-child(10)::after,
+      .box span:nth-child(12)::after,
+      .box span:nth-child(13)::after,
+      .box span:nth-child(14)::after,
+      .box span:nth-child(15)::after {
+        background-image: linear-gradient(
+          to bottom,
+          #ccc,
+          #ccc 10px,
+          transparent 10px,
+          transparent 390px,
+          #ccc 10px
+        );
+      }
+
+      .s,
+      .m,
+      .h {
+        position: absolute;
+        width: 8px;
+        height: 5px;
+        border-radius: 8px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        animation: s 60s infinite steps(60);
+        clip-path: circle(100%);
+        overflow: hidden;
+        transition: 1s;
+        z-index: 1000;
+      }
+      .m {
+        width: 12px;
+        height: 6px;
+        animation: m 3600s infinite steps(60);
+        z-index: 100;
+      }
+      .h {
+        z-index: 10;
+        width: 15px;
+        height: 8px;
+        animation: h 43200s infinite steps(12);
+      }
+      .s-mask,
+      .m-mask,
+      .h-mask {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        top: 0px;
+        left: -450px;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        background: linear-gradient(
+            217deg,
+            rgba(255, 0, 0, 0.8),
+            rgba(255, 0, 0, 0) 70.71%
+          ),
+          linear-gradient(
+            127deg,
+            rgba(0, 255, 0, 0.8),
+            rgba(0, 255, 0, 0) 70.71%
+          ),
+          linear-gradient(
+            336deg,
+            rgba(0, 0, 255, 0.8),
+            rgba(0, 0, 255, 0) 70.71%
+          );
+        animation: s-mask 10s linear infinite;
+      }
+      .shake {
+        width: 100%;
+        height: 100%;
+        animation: shake 1s linear infinite;
+      }
+      @keyframes s {
+        from {
+          transform: rotate(-90deg) translate(175px);
+        }
+        to {
+          transform: rotate(270deg) translate(175px);
+        }
+      }
+      @keyframes m {
+        from {
+          transform: rotate(-90deg) translate(150px);
+        }
+        to {
+          transform: rotate(270deg) translate(150px);
+        }
+      }
+      @keyframes h {
+        from {
+          transform: rotate(-90deg) translate(110px);
+        }
+        to {
+          transform: rotate(270deg) translate(110px);
+        }
+      }
+      @keyframes s-mask {
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+      @keyframes shake {
+        from {
+          transform: rotate(0deg);
+        }
+        10% {
+          transform: rotate(0.8deg);
+        }
+        20% {
+          transform: rotate(0.8deg);
+        }
+        21% {
+          transform: rotate(-0.8deg);
+        }
+        25% {
+          transform: rotate(0.8deg);
+        }
+        30% {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+      label::before {
+        position: absolute;
+        content: 'Click me!';
+        width: 70px;
+        height: 30px;
+        left: 0;
+        right: 0;
+        top: 80%;
+        margin: auto;
+        background-color: tan;
+        line-height: 30px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 12px;
+        border-radius: 50%;
+        z-index: 100000;
+      }
+      input {
+        display: none;
+      }
+      i:first-of-type {
+        position: absolute;
+        font-style: normal;
+        width: 100%;
+        height: 22px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        left: 0px;
+        color: #fff;
+      }
+      i:first-of-type::before {
+        content: '9';
+        font-weight: 700;
+      }
+      i:first-of-type::after {
+        position: absolute;
+        right: 0;
+        content: '3';
+        font-weight: 700;
+      }
+      i:nth-of-type(2) {
+        position: absolute;
+        font-style: normal;
+        width: 22px;
+        height: 100%;
+        top: 0;
+        left: 0px;
+        right: 0;
+        margin: auto;
+        color: #fff;
+      }
+      i:nth-of-type(2)::before{
+        content: '12';
+        font-weight: 700;
+      }
+      i:nth-of-type(2)::after{
+        position: absolute;
+        content: '6';
+        font-weight: 700;
+        bottom: -3px;
+        left: 7px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="checkbox" id="hole">
+    <label for="hole"></label>
+    <div class="box">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <i></i>
+      <i></i>
+      <div class="shake"><em class="s"><div class="s-mask"></div>
+        </div>
+      </em>
+      </div>
+      <em class="m"> <div class="m-mask"></div></em>
+      <em class="h"> <div class="h-mask"></div></em>
+      <div class="box-mask"></div>
+    </div>
+  </body>
+</html>
