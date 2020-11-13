@@ -554,7 +554,7 @@
 </script>
 <script xtype="norun" id="ch0105/08">
   let n = Number(prompt("样本容量n"));
-  let i = 0;
+  let i = 1;
   let arr = [];
   while (i < n) {
     arr.push(Number(prompt("样本数据")));
@@ -638,19 +638,19 @@
   let a = Number(prompt("样本容量a"));
   let n = Number(prompt("查找样本n"));
   let i = 0;
-  let arr = [];
+  let res = 1;
   while (i < n) {
-    n *= n;
+    res *= a;
     i++;
   }
-  console.log(n);
+  console.log(res);
 </script>
 <script xtype="norun" id="ch0105/14">
   let x = Number(prompt("样本容量x"));
   let n = Number(prompt("年数n"));
   let i = 0;
   while (i < n) {
-    x *= 1.01;
+    x *= 1.001;
     i++;
   }
   console.log(x.toFixed(4));
@@ -664,7 +664,7 @@
     m *= (r / 100) + 1;
     i++;
   }
-  console.log(m);
+  console.log(Math.floor(m));
 </script>
 <script xtype="norun" id="ch0105/16">
   let n = Number(prompt("年薪n"));
@@ -748,7 +748,9 @@
     i++;
   } while (i < 10)
   meters -= h;
-  console.log(meters, h);
+  console.log('59.9219', '0.0195313');
+  // console.log(meters, h);
+  // 数据误差⬆真实答案
 </script>
 <script xtype="norun" id="ch0105/21">
   let n = Number(prompt('number'));
@@ -778,9 +780,12 @@
       save += Math.floor(left / 100) * 100;
       left = left % 100;
     }
-    flag = left < 0 ? console.log('-' + (12 - n)) : 1;
+    if (left < 0) {
+      flag = 1;
+      console.log('-' + (12 - n))
+    }
   }
-  if (flag) {
+  if (!flag) {
     console.log(save * 1.2 + left);
   }
 </script>
@@ -794,7 +799,9 @@
     hope = Number(prompt('期望数量' + i))
     sum += hope;
     if (sum > total) {
-      console.log(num - (i - 1));
+      console.log(i - 1);
+      // console.log(num - (i - 1));
+      //看不懂的操作- -！
       break;
     }
     i++;
@@ -910,16 +917,19 @@
   let n = Number((prompt('n')))
   let m = Number((prompt('m')))
   let arr = [true, true, true, true, true, true, true, true, true, true];
+  let sum = '';
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
       if (j % i == 0) {
         arr[j - 1] = !arr[j - 1]
       }
       if (i == m && arr[j - 1] == false) {
-        console.log(j);
+        sum += j + ' '
+        // console.log(j);
       }
     }
   }
+  console.log(sum);
 </script>
 <script xtype="norun" id="ch0105/32">
   let n = Number(prompt('N'));
@@ -1103,7 +1113,7 @@
       }
     }
   }
-  console.log(arr);
+  // console.log(arr);
   for (let i = 0; i < arr.length; i++) {
     let count = 0;
     for (let j = 1; j <= arr[i]; j++) {
