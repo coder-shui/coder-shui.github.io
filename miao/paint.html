@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="500" height="500"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated'
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = x | 0
+    y = y | 0
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+
+  function line(x1, y1, x2, y2) {
+    ctx.strokeStyle = 'black'
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.stroke()
+  }
+  /**
+   * YOUR TASK
+画图的题：
+画一条实线
+画一条一个实点一个空点的虚线
+画一条两个实点两个空点的虚线
+画一条三个实点两个空点的虚线
+画一条45度的斜线
+画一条30度的斜线（选做）
+在四个角画分别画一条45度的斜线以让画面看起来像一个相框
+画一条跨越画布左上角和右下角的对角线
+画一个空心矩形
+画一个实心矩形
+画一个rgb色彩空间的某一面
+画一个空心的圆
+画一个实心的圆
+画一个大小合适的sin(x)的图像
+   */
+</script>
+<script>
+  // YOUR CODE GOES BELOW
+  for (let i = 0; i < 500; i++) {
+    dot(i, 1, color = 'red')
+  }
+  for (let i = 0; i < 500; i += 2) {
+    dot(i, 3, color = 'red')
+  }
+  for (let i = 0; i < 500; i += 4) {
+    dot(i, 5, color = 'red')
+    dot(i + 1, 5, color = 'red')
+  }
+  for (let i = 0; i < 500; i += 5) {
+    dot(i, 7, color = 'red')
+    dot(i + 1, 7, color = 'red')
+    dot(i + 2, 7, color = 'red')
+  }
+  //45deg
+  for (let i = 0; i < 500; i++) {
+    dot(i, i + 9, color = 'red')
+  }
+  //30deg,
+  // 方案一，分贴近x轴（贴近x轴，在y轴方向上点不重复绘制；贴近y轴则在x轴方向上的点不重复绘制）和贴近y轴两种情况，贴近x轴时以x轴为自加量，y通过x算出，
+  // 方案二，也是分为上面两种情况，贴近x轴时，y通过声明另外一个变量，当每次x自加这个变量都加上相对应的比例（贴近x轴时，y的比例小于x的增加比例）
+  //        每当这个变量累加的比例大于x所占比例时，y就向相应方向加一个像素的距离（此时这个变量需要减去对应的x的比例，重新累加）。
+  let dx = Math.sqrt(3);
+  let dy = 1;
+  let y = 0;
+  let yy = 0;
+  for (let i = 0; i < 500; i++) {
+    dot(i, y + 20, color = 'orange')
+    yy += dy;
+    if (yy > dx) {
+      y++;
+      yy -= dx;
+    }
+  }
+  //相框线
+  for (let i = 0; i < 500; i++) {
+    dot(i, i + 450, color = "green")
+    dot(i, i + 451, color = "green")
+    dot(i, i + 452, color = "green")
+    dot(i, i + 453, color = "green")
+    dot(i, i + 454, color = "green")
+    dot(i, i + 455, color = "green")
+    dot(i, i - 450, color = "green")
+    dot(i, i - 451, color = "green")
+    dot(i, i - 452, color = "green")
+    dot(i, i - 453, color = "green")
+    dot(i, i - 454, color = "green")
+    dot(i, i - 455, color = "green")
+    dot(i, -i + 950, color = "green")
+    dot(i, -i + 951, color = "green")
+    dot(i, -i + 952, color = "green")
+    dot(i, -i + 953, color = "green")
+    dot(i, -i + 954, color = "green")
+    dot(i, -i + 955, color = "green")
+    dot(i - 450, -i + 500, color = "green")
+    dot(i - 451, -i + 500, color = "green")
+    dot(i - 452, -i + 500, color = "green")
+    dot(i - 453, -i + 500, color = "green")
+    dot(i - 454, -i + 500, color = "green")
+    dot(i - 455, -i + 500, color = "green")
+  }
+  //矩形
+  for (let i = 200; i < 300; i++) {
+    dot(i, 11, 'red')
+    dot(i, 111, 'red')
+  }
+  for (let j = 11; j < 111; j++) {
+    dot(200, j, 'red')
+    dot(300, j, 'red')
+  }
+  //实心矩形
+  for (let i = 310; i < 410; i++) {
+    for (let j = 11; j < 111; j++) {
+      dot(i, j, 'red ')
+    }
+  }
+  //rgb色彩空间
+  for (let i = 0; i < 256; i++) {
+    for (let j = 240; j < 500; j++) {
+      dot(i, j, color = 'rgb( ' + i + ',' + '0' + ',' + (j - 240) + ')')
+    }
+  }
+  //空心圆
+  for (let i = 0; i < 360; i++) {
+    dot(Math.cos(i) * 100 + 200, Math.sin(i) * 100 + 200, color = 'tomato')
+  }
+  // 方法1， 在切线贴近x轴的八分之一段圆上算出y的值， 再镜像出另外七段圆弧。
+  let r = 100;
+  let i;
+  let x = 0;
+  let cy;
+  do {
+    cy = Math.sqrt(r * r - x * x)
+    dot(x + 250, cy + 250, color = 'orange')
+    dot(x + 250, -cy + 250, color = 'orange')
+    dot(-x + 250, cy + 250, color = 'orange')
+    dot(-x + 250, -cy + 250, color = 'orange')
+    dot(cy + 250, x + 250, color = 'orange')
+    dot(cy + 250, -x + 250, color = 'orange')
+    dot(-cy + 250, x + 250, color = 'orange')
+    dot(-cy + 250, -x + 250, color = 'orange')
+    x++;
+  } while (x < y)
+  //圆方法二，判断下一个点的位置（通过右方和右下放的点与圆心的位置，取最近的点来绘制）。
+  let r1 = 100;
+  let x1 = 0;
+  let y1 = r1;
+  let rs = r1 * r1
+  let d2;
+  let d3;
+  while (x1 <= y1) {
+    dot(x1 + 300, y1 + 300, color = 'orange')
+    dot(x1 + 300, -y1 + 300, color = 'orange')
+    dot(-x1 + 300, y1 + 300, color = 'orange')
+    dot(-x1 + 300, -y1 + 300, color = 'orange')
+    dot(y1 + 300, x1 + 300, color = 'orange')
+    dot(y1 + 300, -x1 + 300, color = 'orange')
+    dot(-y1 + 300, x1 + 300, color = 'orange')
+    dot(-y1 + 300, -x1 + 300, color = 'orange')
+    d2 = (x1 + 1) * (x1 + 1) + y1 * y1;
+    d3 = (x1 + 1) * (x1 + 1) + (y1 - 1) * (y1 - 1);
+    if (Math.abs((d2 - rs)) < Math.abs((d3 - rs))) {
+      x1 = x1 + 1
+      y1 = y1
+    } else {
+      x1 = x1 + 1
+      y1 = y1 - 1
+    }
+    for (let i = -x1 + 300; i < x1 + 300; i++) {
+      dot(i, y1 + 300)
+    }
+  }
+</script>
+
+</html>
