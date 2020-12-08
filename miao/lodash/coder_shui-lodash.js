@@ -280,6 +280,7 @@ var coder_shui = function () {
     return s
   }
   return {
+    sumBy,
     sum,
     maxBy,
     max,
