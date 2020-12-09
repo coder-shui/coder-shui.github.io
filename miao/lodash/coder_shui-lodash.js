@@ -83,7 +83,7 @@ var coder_shui = function () {
     return res
   }
   function fill(array,value, s = 0, e = array.length - 1) {
-    for (let i = s; i < e; i++) {
+    for (let i = s; i <= e; i++) {
       if (array.length < s) {
         for (let j = array.length; j <= s; j++) {
           array[j] = j
@@ -116,7 +116,7 @@ var coder_shui = function () {
     } else if (typeof (f) == 'string') {
       for (let i = fromIndex; i < array.length; i++) {
         for (let j in array[i]) {
-          if (j == f || array[i][j] == f) return i
+          if (array[i][f]) return i
         }
       }
       return -1
@@ -145,7 +145,7 @@ var coder_shui = function () {
     } else if (typeof (f) == 'string') {
       for (let i = fromIndex; i >= 0; i--) {
         for (let j in array[i]) {
-          if (j == f || array[i][j] == f) return i
+          if (array[i][f]) return i
         }
       }
       return -1
@@ -257,10 +257,10 @@ var coder_shui = function () {
     } else if (typeof (f) == 'object') {
       for (let i = 0; i < array.length; i++) {
         for (let j in array[i]) {
-          if (f[j] && array[i][j] == f[j]) return true
+          if (!f[j] || array[i][j] !== f[j]) return false
         }
       }
-      return false
+      return true
     } else {
       for (let i = 0; i < array.length; i++) {
         for (j in array[i]) {
@@ -314,8 +314,8 @@ var coder_shui = function () {
         for (let j in array[i]) {
           if (array[i][f[0]] == f[1])return array[i]
         }
-        return -1
       }
+      return -1
     } else if (typeof (f) == 'object') {
       for (let i = 0; i < array.length; i++) {
         let flag = 1
@@ -370,14 +370,16 @@ var coder_shui = function () {
   }
   function minBy(array, f ) {
     let res = []
-    let m = Infinity
+    let m 
     if (typeof (f) == 'function') {
+      m = 0
       for (let i = 0; i < array.length; i++) {
         res.push(f(array[i]))
         m = res[i] < res[m] ? i : m
       }
       return array[m]
     } else {
+      m = Infinity
       for (let i = 0; i < array.length; i++) {
         m = array[i][f] < m ? i : m
       }
@@ -393,20 +395,22 @@ var coder_shui = function () {
   }
   function maxBy(array,f) {
     let res = []
-    let m = -Infinity
+    let m 
     if (typeof (f) == 'function') {
+      m = 0 
       for (let i = 0; i < array.length; i++) {
         res.push(f(array[i]))
         m = res[i] > res[m] ? i : m
       }      
       return res[m]
     } else {
+      m = -Infinity
       for (let i = 0; i < array.length; i++) {
         for (let j in array[i]) {
-          m = array[i][j] > m ? array[i][j] : m
+          m = array[i][j] > m ? i : m
         }
       }
-      return m
+      return res[m]
     }
   }
   function sum(array) {
@@ -422,12 +426,12 @@ var coder_shui = function () {
       for (let i = 0; i < array.length; i++) {
           sum += f(array[i])
       }
-      return sum
+      return s
     } else {
       for (let i = 0; i < array.length; i++) {
         sum += array[i][f]
       }
-      return sum
+      return s
     }
   }
   return {
