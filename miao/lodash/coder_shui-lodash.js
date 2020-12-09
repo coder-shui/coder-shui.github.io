@@ -62,9 +62,9 @@ var coder_shui = function () {
   function last(array) {
     return array[array.length - 1]
   }
-  function lastIndexOf(array,value) {
-    for (let i = array.length - 1; i >= 0; i--) {
-      if (array[i] === valuie)return i
+  function lastIndexOf(array,value, fromIndex = array.length - 1) {
+    for (let i = fromIndex; i >= 0; i--) {
+      if (array[i] === value)return i
     }
     return -1
   }
@@ -85,7 +85,7 @@ var coder_shui = function () {
   function fill(array,value, s = 0, e = array.length - 1) {
     for (let i = s; i < e; i++) {
       if (array.length < s) {
-        for (let j = array.length; j < s; j++) {
+        for (let j = array.length; j <= s; j++) {
           array[j] = j
         }
       }
@@ -94,16 +94,62 @@ var coder_shui = function () {
     return array
   }
   function findIndex(array, f , fromIndex = 0) {
-    for (let i = fromIndex; i < array.length; i++) {
-      if (f(array[i])) return i
+    if (typeof (f) == 'function') {
+      for (let i = fromIndex; i < array.length; i++) {
+        if (f( array[i])) return i        
+      }
+      return -1
+    }else if (Array.isArray(f)) {
+      for (let i = fromIndex; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (f[0] == j && f[1] == array[i][j]) return i
+        }
+      }
+      return -1
+    }else if (typeof (f) == 'object') {
+      for (let i = fromIndex; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (f[j] && array[i][j] == f[j]) return i
+        }
+      }
+      return -1
+    } else if (typeof (f) == 'string') {
+      for (let i = fromIndex; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (j == f || array[i][j] == f) return i
+        }
+      }
+      return -1
     }
-    return -1
   }
-  function findLastIndex(array, f , fromIndex = arr.length - 1) {
-    for (let i = fromIndex; i >= 0; i++) {
-      if (f(array[i])) return i
+  function findLastIndex(array, f , fromIndex = array.length - 1) {
+    if (typeof (f) == 'function') {
+      for (let i = fromIndex; i >= 0; i--) {
+        if (f( array[i])) return i        
+      }
+      return -1
+    }else if (Array.isArray(f)) {
+      for (let i = fromIndex; i >= 0; i--) {
+        for (let j in array[i]) {
+          if (f[0] == j && f[1] == array[i][j]) return i
+        }
+      }
+      return -1
+    }else if (typeof (f) == 'object') {
+      for (let i = fromIndex; i >= 0; i--) {
+        for (let j in array[i]) {
+          if (f[j] && array[i][j] == f[j]) return i
+        }
+      }
+      return -1
+    } else if (typeof (f) == 'string') {
+      for (let i = fromIndex; i >= 0; i--) {
+        for (let j in array[i]) {
+          if (j == f || array[i][j] == f) return i
+        }
+      }
+      return -1
     }
-    return -1
   }
   function flatten(array) {
     let res = []
@@ -181,7 +227,11 @@ var coder_shui = function () {
     while (l <= r) {
       pivot = Math.floor(l + (r - l) / 2)
       if (value === array[pivot]) {
-        return pivot
+        let i = pivot
+        while (array[i] == value) {
+          i--
+        }
+        return i + 1
       } else if (value > array[pivot]) {
         l = pivot + 1
       } else {
@@ -191,22 +241,100 @@ var coder_shui = function () {
     return pivot
   }
   function every(array, f) {
-    if (! array[0]) return true
-    for (let i = 0; i < array.length; i++) {
-      if ( !f(array[i])) return false
+    if (typeof (f) == 'function') {      
+      if (! array[0]) return true
+      for (let i = 0; i < array.length; i++) {
+        if ( !f(array[i])) return false
+      }
+      return true
+    } else if (Array.isArray(f)) {
+      for (let i = 0; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (array[i][f[0]] !== f[1])return false
+        }
+        return true
+      }
+    } else if (typeof (f) == 'object') {
+      for (let i = 0; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (f[j] && array[i][j] == f[j]) return true
+        }
+      }
+      return false
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        for (j in array[i]) {
+          if (!array[i][f]) return false
+        }
+      }
+      return true
     }
-    return true
   }
   function filter(array,f) {
     let res = []
-    for (let i = 0; i < array.length; i++) {
-      if (f(array[i])) res.push(array[i])
+    if (typeof (f) == 'function') {
+      for (let i = 0; i < array.length; i++) {
+        if (f(array[i])) res.push(array[i])
+      }
+    } else if (Array.isArray(f)) {
+      for (let i = 0; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (array[i][f[0]] == f[1]) {
+            res.push(array[i])
+          }
+        }
+      }
+    } else if (typeof (f) == 'object') {
+      for (let i = 0; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (f[j] && array[i][j] == f[j]) {
+            res.push( array[i])
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        for (j in array[i]) {
+          if (array[i][f]){
+            res.push(array[i])
+          }
+        }
+      }
     }
-    return res
+    return res      
   }
   function find(array, f) {
-    for (let i = 0; i < array.length; i++) {
-      if (f( array[i],i,array)) return array[i]
+    if (typeof (f) == 'function') {      
+      for (let i = 0; i < array.length; i++) {
+        if ( f(array[i])) return array[i]
+      }
+      return -1
+    } else if (Array.isArray(f)) {
+      for (let i = 0; i < array.length; i++) {
+        for (let j in array[i]) {
+          if (array[i][f[0]] == f[1])return array[i]
+        }
+        return -1
+      }
+    } else if (typeof (f) == 'object') {
+      for (let i = 0; i < array.length; i++) {
+        let flag = 1
+        for (let j in f) {
+          if (!array[i][j] || array[i][j] !== f[j]) {
+            flag = 0
+            continue
+          }
+        }
+        if (flag) return array[i]
+      }
+      return -1
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        for (j in array[i]) {
+          if (array[i][f]) return array[i]
+        }
+      }
+      return -1
     }
   }
   function toArray(value) {
@@ -242,15 +370,22 @@ var coder_shui = function () {
   }
   function minBy(array, f ) {
     let res = []
-    let m = 0
-    for (let i = 0; i < array.length; i++) {
-      res.push(f(array[i]))
-      m = res[i] < res[m] ? i : m
+    let m = Infinity
+    if (typeof (f) == 'function') {
+      for (let i = 0; i < array.length; i++) {
+        res.push(f(array[i]))
+        m = res[i] < res[m] ? i : m
+      }
+      return array[m]
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        m = array[i][f] < m ? i : m
+      }
+      return array[m]
     }
-    return array[m]
   }
   function max(array) {
-    let sum = -Infinity
+    let sum = array[0]
     array.forEach((a) => {
       sum = a > sum ? a : sum
     });
@@ -258,12 +393,21 @@ var coder_shui = function () {
   }
   function maxBy(array,f) {
     let res = []
-    let m = 0
-    for (let i = 0; i < array.length; i++) {
-      res.push(f(array[i]))
-      m = res[i] > res[m] ? i : m
+    let m = -Infinity
+    if (typeof (f) == 'function') {
+      for (let i = 0; i < array.length; i++) {
+        res.push(f(array[i]))
+        m = res[i] > res[m] ? i : m
+      }      
+      return res[m]
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        for (let j in array[i]) {
+          m = array[i][j] > m ? array[i][j] : m
+        }
+      }
+      return m
     }
-    return array[m]
   }
   function sum(array) {
     let s = 0
@@ -274,10 +418,17 @@ var coder_shui = function () {
   }
   function sumBy(array, f) {
     let s = 0
-    array.forEach(a => {
-      sum += f(a)
-    })
-    return s
+    if (typeof (f) == 'function') {
+      for (let i = 0; i < array.length; i++) {
+          sum += f(array[i])
+      }
+      return sum
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        sum += array[i][f]
+      }
+      return sum
+    }
   }
   return {
     sumBy,
