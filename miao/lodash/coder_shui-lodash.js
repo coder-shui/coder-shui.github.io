@@ -424,12 +424,12 @@ var coder_shui = function () {
     let s = 0
     if (typeof (f) == 'function') {
       for (let i = 0; i < array.length; i++) {
-          sum += f(array[i])
+          s += f(array[i])
       }
       return s
     } else {
       for (let i = 0; i < array.length; i++) {
-        sum += array[i][f]
+        s += array[i][f]
       }
       return s
     }
