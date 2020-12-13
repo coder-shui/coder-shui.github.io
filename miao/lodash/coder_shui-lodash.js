@@ -82,8 +82,8 @@ var coder_shui = function () {
     }
     return res
   }
-  function fill(array,value, s = 0, e = array.length - 1) {
-    for (let i = s; i <= e; i++) {
+  function fill(array,value, s = 0, e = array.length) {
+    for (let i = s; i < e; i++) {
       if (array.length < s) {
         for (let j = array.length; j <= s; j++) {
           array[j] = j
@@ -278,27 +278,28 @@ var coder_shui = function () {
       }
     } else if (Array.isArray(f)) {
       for (let i = 0; i < array.length; i++) {
-        for (let j in array[i]) {
           if (array[i][f[0]] == f[1]) {
             res.push(array[i])
           }
-        }
       }
     } else if (typeof (f) == 'object') {
       for (let i = 0; i < array.length; i++) {
-        for (let j in array[i]) {
-          if (f[j] && array[i][j] == f[j]) {
-            res.push( array[i])
+        let flag = 1
+        for (let j in f) {
+          if (!array[i][j] || array[i][j] !== f[j]) {
+            flag = 0
+            break
           }
+        }
+        if (flag) {
+          res.push(array[i])
         }
       }
     } else {
       for (let i = 0; i < array.length; i++) {
-        for (j in array[i]) {
           if (array[i][f]){
             res.push(array[i])
           }
-        }
       }
     }
     return res      
@@ -402,15 +403,13 @@ var coder_shui = function () {
         res.push(f(array[i]))
         m = res[i] > res[m] ? i : m
       }      
-      return res[m]
+      return array[m]
     } else {
-      m = -Infinity
-      for (let i = 0; i < array.length; i++) {
-        for (let j in array[i]) {
-          m = array[i][j] > m ? i : m
-        }
+      m = array[0]
+      for (let i = 1; i < array.length; i++) {
+        m = array[i][f] > m[f] ? array[i] : m
       }
-      return res[m]
+      return m
     }
   }
   function sum(array) {
