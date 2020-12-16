@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function type(arg) {
+      if (arg !== arg) return 'NaN'
+      if (typeof (arg) !== 'object') {
+        return (typeof (arg))
+      } else if (Array.isArray(arg)) {
+        return 'array'
+      } else if (!arg) {
+        return 'null'
+      } else {
+        return 'object'
+      }
+    }
+
+    function isEqual(a, b) {
+      if (type(a) !== type(b)) {
+        return false
+      } else if (type(a) === 'object') {
+        for (let i in a) {
+          if (!b[i] || !isEqual(a[i], b[i])) {
+            return false
+          }
+        }
+        for (let j in b) {
+          if (!a[j] || !isEqual(a[j], b[j])) {
+            return false
+          }
+        }
+      } else if (type(a) === 'array') {
+        if (a.length !== b.length) {
+          return false
+        } else {
+          for (let i = 0; i < a.length; i++) {
+            if (!isEqual(a[i], b[i])) {
+              return false
+            }
+          }
+        }
+      } else if (type(a) === 'number' || type(a) === 'string' || type(a) === 'boolean' || type(a) === 'undefined' ||
+        a !== a && b !== b) {
+        return true
+      } else {
+        return true
+      }
+    }
+
+    function i(args) {
+      if (type(args) == 'string') {
+        return function (o) {
+          return o[args]
+        }
+      } else if (type(args) == 'array') {
+        return function (o) {
+          return o[args[0]] === args[1]
+        }
+      } else if (type(args) == 'object') {
+        return function (o) {
+          for (let k in args) {
+            if (!o[k] || o[k] !== args[k]) {
+              return false
+            }
+          }
+          return true
+        }
+      } else if (type(args) == ' function') {
+        return args
+      }
+    }
+
+    function dropRightWhile(array, args) {
+      let f = i(args)
+      let res = []
+      for (let i = 0; i < array.length; i++) {
+        if (f(array[i])) {
+          continue
+        } else {
+          res.push(array[i])
+        }
+      }
+      return res
+    }
+    let a = [{
+        a: 1,
+        b: 2,
+        c: 3
+      }, {
+        a: 4,
+        b: 5,
+        C: 6
+      },
+      {
+        a: 7,
+        b: 8,
+        C: 9
+      }
+    ]
+    let b = {
+      a: 1,
+      b: 2,
+      c: 3
+    }
+    console.log(dropRightWhile(a, b));
+    console.log(i(b)(a[0]));
+  </script>
+</body>
+
+</html>

@@ -1,4 +1,70 @@
 var coder_shui = function () {
+  function type(arg) {
+    if (arg !== arg) return 'NaN'
+    if (typeof (arg) !== 'object') {
+      return (typeof (arg))
+    } else if (Array.isArray(arg)) {
+      return 'array'
+    } else if (!arg) {
+      return 'null'
+    } else {
+      return 'object'
+    }
+  }
+  function isEqual(a, b) {
+    if (type(a) !== type(b)) {
+      return false
+    } else if (type(a) === 'object') {
+      for (let i in a) {
+        if (!b[i] || !isEqual(a[i], b[i])) {
+          return false
+        }
+      }
+      for (let j in b) {
+        if (!a[j] || !isEqual(a[j], b[j])) {
+          return false
+        }
+      }
+    } else if (type(a) === 'array') {
+      if (a.length !== b.length) {
+        return false
+      } else {
+        for (let i = 0; i < a.length; i++) {
+          if (!isEqual(a[i], b[i])) {
+            return false
+          }
+        }
+      }
+    } else if (type(a) === 'number' || type(a) === 'string' || type(a) === 'boolean' || type(a) === 'undefined' ||
+      a !== a && b !== b) {
+      return true
+    } else {
+      return true
+    }
+  }
+  function i(args) {
+    if (type(args) == 'string') {
+      return function (o) {
+        return  o[args]
+      }
+    } else if (type(args) == 'array') {
+      return function (o) {
+        return o[args[0]] === args[1]
+      }
+    } else if (type(args) == 'object') {
+      return function (o) {
+        for (let k in args) {
+          if (!o[k] || o[k] !== args[k]) {
+            return false
+          }
+        }
+        return true
+      }
+    } else if (type(args) == ' function') {
+      return args
+    }
+  }
+  //辅助函数
   function chunk(array,size) {
     if (array.length < size) {
       return array
@@ -433,7 +499,69 @@ var coder_shui = function () {
       return s
     }
   }
+  function differenceBy(array, ...values) {
+    let f = arguments[arguments.length - 1]
+    let temp = []
+    let res = []
+    if (typeof (f) == 'function') {
+      for (let i = 0; i < values.length - 1; i++) {
+        for (let j = 0; j < values.length; j++) {
+          temp.push(f(values[i][j]))
+        }
+      }
+      for (let i = 0; i < array.length; i++) {
+        if (temp.indexOf(f(array[i])) == -1) {
+          res.push(array[i])
+        }
+      }
+      return res
+    } else if (typeof (f) == 'string') {
+      for (let i = 0; i < values.length - 1; i++) {
+        for (let j = 0; j < values[i].length; j++) {
+          let t = values[i][j][f]
+          temp.push(t)
+        }
+      }
+      for (let i = 0; i < array.length; i++) {
+        if (temp.indexOf(array[i][f]) == -1) {
+          res.push(array[i])
+        }
+      }
+      return res
+    } else {
+      return difference(array, ...values)
+    }
+  }
+  function differenceWith(array, values, f) {
+    let res = []
+    for (let i = 0; i < array.length; i++) {
+      let flag = 1
+      for (let j = 0; j < values.length; j++) {
+        if (f(array[i], values[j])) {
+          flag = 0
+        }
+      }
+      if(flag) res.push(array[i])
+    }
+    return res
+  }
+  function dropRightWhile(array, args) {
+    debugger
+    let f = i(args)
+    let res = []
+    for (let i = 0; i < array.length; i++) {
+      if (f(array[i])) {
+        continue
+      } else {
+        res.push(array[i])
+      }
+    }
+    return res
+  }
   return {
+    dropRightWhile,
+    differenceWith,
+    differenceBy,
     sumBy,
     sum,
     maxBy,
