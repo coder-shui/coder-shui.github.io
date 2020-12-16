@@ -54,63 +54,103 @@
       }
     }
 
-    function i(args) {
-      if (type(args) == 'string') {
+    function i2(a) {
+      if (type(a) == 'string') {
         return function (o) {
-          return o[args]
+          if (a in o) {
+            return true
+          } else {
+            return false
+          }
         }
-      } else if (type(args) == 'array') {
+      } else if (type(a) == 'array') {
         return function (o) {
-          return o[args[0]] === args[1]
+          if (a[0] in o && o[a[0]] === a[1]) {
+            return true
+          } else {
+            return false
+          }
         }
-      } else if (type(args) == 'object') {
+      } else if (type(a) == 'object') {
         return function (o) {
-          for (let k in args) {
-            if (!o[k] || o[k] !== args[k]) {
+          for (let i in a) {
+            if (!(i in o) || o[i] !== a[i]) {
               return false
             }
           }
           return true
         }
-      } else if (type(args) == ' function') {
-        return args
+      } else {
+        return a
       }
     }
 
     function dropRightWhile(array, args) {
-      let f = i(args)
-      let res = []
-      for (let i = 0; i < array.length; i++) {
-        if (f(array[i])) {
-          continue
-        } else {
-          res.push(array[i])
+      let f = i2(args)
+      for (let i = array.length - 1; i >= 0; i--) {
+        if (f(array[i])) array.pop()
+      }
+      return array
+    }
+    console.log(dropRightWhile([{
+      "user": "barney",
+      "active": true
+    }, {
+      "user": "fred",
+      "active": false
+    }, {
+      "user": "pebbles",
+      "active": false
+    }], {
+      "user": "pebbles",
+      "active": false
+    }));
+    let a = i2({
+      "user": "pebbles",
+      "active": false
+    })
+    let b = [{
+      "user": "barney",
+      "active": true
+    }, {
+      "user": "fred",
+      "active": false
+    }, {
+      "user": "pebbles",
+      "active": false
+    }]
+    console.log(dropRightWhile(b, a));
+
+    function i2(a) {
+      if (type(a) == 'string') {
+        return function (o) {
+          if (a in o) {
+            return true
+          } else {
+            return false
+          }
         }
+      } else if (type(a) == 'array') {
+        return function (o) {
+          if (a[0] in o && o[a[0]] === a[1]) {
+            return true
+          } else {
+            return false
+          }
+        }
+      } else if (type(a) == 'object') {
+        return function (o) {
+          for (let i in a) {
+            if (!(i in o) || o[i] !== a[i]) {
+              return false
+            }
+          }
+          return true
+        }
+      } else {
+        return a
       }
-      return res
     }
-    let a = [{
-        a: 1,
-        b: 2,
-        c: 3
-      }, {
-        a: 4,
-        b: 5,
-        C: 6
-      },
-      {
-        a: 7,
-        b: 8,
-        C: 9
-      }
-    ]
-    let b = {
-      a: 1,
-      b: 2,
-      c: 3
-    }
-    console.log(dropRightWhile(a, b));
-    console.log(i(b)(a[0]));
   </script>
 </body>
 

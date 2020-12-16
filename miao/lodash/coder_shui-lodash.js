@@ -66,6 +66,37 @@ var coder_shui = function () {
       return args
     }
   }
+
+  function i2(a) {
+    if (type(a) == 'string') {
+      return function (o) {
+        if (a in o) {
+          return true
+        } else {
+          return false
+        }
+      }
+    } else if (type(a) == 'array') {
+      return function (o) {
+        if (a[0] in o && o[a[0]] === a[1]) {
+          return true
+        } else {
+          return false
+        }
+      }
+    } else if (type(a) == 'object') {
+      return function (o) {
+        for (let i in a) {
+          if (!(i in o) || o[i] !== a[i]) {
+            return false
+          }
+        }
+        return true
+      }
+    } else {
+      return a
+    }
+  }
   //辅助函数
   function chunk(array, size) {
     if (array.length < size) {
@@ -585,29 +616,15 @@ var coder_shui = function () {
   }
 
   function dropRightWhile(array, args) {
-    let f = i(args)
-    let res = []
-    if (type(args) == 'string') {
-      for (let i = 0; i < array.length; i++) {
-        if (f(array[i]) !== undefined) {
-          res.push(array[i])
-        }
-      }
-    } else {
-      return array.filter(a => f)
-      // for (let i = 0; i < array.length; i++) {
-      //   if (f(array[i])) {
-      //     continue
-      //   } else {
-      //     res.push(array[i])
-      //   }
-      // }
+    let f = i2(args)
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (f(array[i])) array.pop()
     }
-    return res
+    return array
   }
 
   function dropWhile(array, args) {
-    let f = i(args)
+    let f = i2(args)
     let res = []
     for (let i = 0; i < array.length; i++) {
       if (!f(array[i])) {
