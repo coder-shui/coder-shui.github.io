@@ -721,7 +721,62 @@ var coder_shui = function () {
     let temp = array.map((a) => f(a))
     return sortedIndex(temp, f(value))
   }
+
+  function sortedIndexOf(array, value) {
+    if (array[0] > value) return 0
+    if (array[array.length - 1] < value) return array.length
+    let l = 0,
+      r = array.length - 1,
+      pivot
+    while (l <= r) {
+      pivot = Math.floor(l + (r - l) / 2)
+      if (value === array[pivot]) {
+        let i = pivot
+        while (array[i] == value) {
+          i--
+        }
+        return i + 1
+      } else if (value > array[pivot]) {
+        l = pivot + 1
+      } else {
+        r = pivot - 1
+      }
+    }
+    return -1
+  }
+
+  function sortedLastIndex(array, value) {
+    if (array[0] > value) return 0
+    if (array[array.length - 1] < value) return array.length
+    let l = 0,
+      r = array.length - 1,
+      pivot
+    while (l <= r) {
+      pivot = Math.floor(l + (r - l) / 2)
+      if (value === array[pivot]) {
+        let i = pivot
+        while (array[i] == value) {
+          i++
+        }
+        return i
+      } else if (value > array[pivot]) {
+        l = pivot + 1
+      } else {
+        r = pivot - 1
+      }
+    }
+    return pivot
+  }
+
+  function sortedLastIndexBy(array, value, iteratee) {
+    let f = i(iteratee)
+    let temp = array.map((a) => f(a))
+    return sortedLastIndex(temp, f(value))
+  }
   return {
+    sortedLastIndexBy,
+    sortedLastIndex,
+    sortedIndexOf,
     sortedIndexBy,
     pullAllWith,
     pullAllBy,
