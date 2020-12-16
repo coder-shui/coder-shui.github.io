@@ -67,14 +67,10 @@ var coder_shui = function () {
     }
   }
 
-  function i2(a) { //string 返回 a in o 布尔值
+  function i2(a) { //string 返回  o[a] 
     if (type(a) == 'string') {
       return function (o) {
-        if (a in o) {
-          return true
-        } else {
-          return false
-        }
+        return o[a]
       }
     } else if (type(a) == 'array') {
       return function (o) {
@@ -613,7 +609,7 @@ var coder_shui = function () {
   }
 
   function dropRightWhile(array, args) {
-    let f = i(args)
+    let f = i2(args)
     for (let i = array.length - 1; i >= 0; i--) {
       if (f(array[i])) {
         array.pop()
@@ -624,7 +620,7 @@ var coder_shui = function () {
   }
 
   function dropWhile(array, args) {
-    let f = i(args)
+    let f = i2(args)
     while (array[0]) {
       if (f(array[0])) {
         array.shift()
@@ -685,8 +681,14 @@ var coder_shui = function () {
     return array
   }
 
+  function pullAllBy(array, values, iteratee) {
+    let f = i(iteratee)
+    array.filter((a) => values.map((a) => f(a)).indexOf(f(a)) == -1)
+    return array
+  }
+
   function pullAllWith(array, values, comparator) {
-    values.forEach((a) => array.filter((b) => comparator(a, b)))
+    array.filter((b) => comparator(b, ...values))
     return array
   }
 
@@ -713,11 +715,16 @@ var coder_shui = function () {
     return pivot
   }
 
-  function sortedIndexBy(array, value, iteratee) {
 
+  function sortedIndexBy(array, value, iteratee) {
+    let f = i(iteratee)
+    let temp = array.map((a) => f(a))
+    return sortedIndex(temp, f(value))
   }
   return {
+    sortedIndexBy,
     pullAllWith,
+    pullAllBy,
     pullAll,
     pull,
     nth,

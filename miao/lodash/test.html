@@ -180,13 +180,57 @@
       }
     }
 
-    function pull(array, ...values) {
-      remove(array, function (a, b, c) {
-        return values.indexOf(a) !== -1
-      })
+    function dropWhile(array, args) {
+      let f = i2(args)
+      while (array[0]) {
+        if (f(array[0])) {
+          array.shift()
+        } else {
+          break
+        }
+      }
       return array
     }
-    console.log(pull(["a", "b", "c", "a", "b", "c"], "a", "c"));
+
+    function i2(a) { //string 返回  o[a] 
+      if (type(a) == 'string') {
+        return function (o) {
+          return o[a]
+        }
+      } else if (type(a) == 'array') {
+        return function (o) {
+          if (a[0] in o && o[a[0]] === a[1]) {
+            return true
+          } else {
+            return false
+          }
+        }
+      } else if (type(a) == 'object') {
+        return function (o) {
+          for (let i in a) {
+            if (!(i in o) || o[i] !== a[i]) {
+              return false
+            }
+          }
+          return true
+        }
+      } else {
+        return a
+      }
+    }
+    console.log(dropWhile([{
+      "user": "barney",
+      "active": false
+    }, {
+      "user": "fred",
+      "active": false
+    }, {
+      "user": "pebbles",
+      "active": true
+    }], {
+      "user": "barney",
+      "active": false
+    }));
   </script>
 </body>
 
