@@ -151,6 +151,31 @@
         return a
       }
     }
+
+    function intersectionWith(...array) {
+      let comparator = arguments[arguments.length - 1]
+      let res = []
+      array[1].forEach((a, b, arr) => {
+        res = res.concat(array[0].filter((c, d, ar) => comparator(a, c)))
+      })
+      return res
+    }
+    cc = intersectionWith([{
+      "x": 1,
+      "y": 2
+    }, {
+      "x": 2,
+      "y": 1
+    }], [{
+      "x": 1,
+      "y": 1
+    }, {
+      "x": 1,
+      "y": 2
+    }], function (n, t) {
+      return Nt(n, t);
+    })
+    console.log(cc);
   </script>
 </body>
 

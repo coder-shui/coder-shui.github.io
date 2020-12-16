@@ -44,7 +44,7 @@ var coder_shui = function () {
     }
   }
 
-  function i(args) {
+  function i(args) { //string 返回 o[args] 
     if (type(args) == 'string') {
       return function (o) {
         return o[args]
@@ -67,7 +67,7 @@ var coder_shui = function () {
     }
   }
 
-  function i2(a) {
+  function i2(a) { //string 返回 a in o 布尔值
     if (type(a) == 'string') {
       return function (o) {
         if (a in o) {
@@ -617,24 +617,71 @@ var coder_shui = function () {
 
   function dropRightWhile(array, args) {
     let f = i2(args)
-    for (let i = array.length - 1; i >= 0; i--) {
-      if (f(array[i])) array.pop()
+    if (type(args) == 'string') {
+      for (let i = array.length - 1; i >= 0; i--) {
+        if (!f(array[i])) array.pop()
+      }
+    } else {
+      for (let i = array.length - 1; i >= 0; i--) {
+        if (f(array[i])) array.pop()
+      }
+      return array
     }
-    return array
   }
 
   function dropWhile(array, args) {
     let f = i2(args)
     let res = []
-    for (let i = 0; i < array.length; i++) {
-      if (!f(array[i])) {
-        res.push[array[i]]
+    if (type(args) == 'string') {
+      for (let i = 0; i < array.length; i++) {
+        if (!f(array[i])) res.push(array[i])
+      }
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        if (f(array[i])) {
+          continue
+        } else {
+          res.push(array[i])
+        }
       }
     }
     return res
   }
 
+  function intersection(...array) {
+    return array[0].filter((a, index) => {
+      if (array[1].indexOf(a) == -1) {
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+
+  function intersectionBy(...array, iteratee) {
+    let f = i(iteratee)
+    let temp = array[0].map((a, b) => f(a))
+    return array[1].filter((a, b) => {
+      if (temp.indexOf(f(a)) == -1) {
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+
+  function intersectionWith(...array) {
+    let comparator = arguments[arguments.length - 1]
+    let res = []
+    array[1].forEach((a, b, arr) => {
+      res = res.concat(array[0].filter((c, d, ar) => comparator(a, c)))
+    })
+    return res
+  }
   return {
+    intersectionWith,
+    intersectionBy,
+    intersection,
     dropWhile,
     dropRightWhile,
     differenceWith,
