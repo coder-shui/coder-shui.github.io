@@ -636,56 +636,45 @@ var coder_shui = function () {
   }
 
   function dropRightWhile(array, args) {
-    let f = i2(args)
-    if (type(args) == 'string') {
-      for (let i = array.length - 1; i >= 0; i--) {
-        if (!f(array[i])) array.pop()
+    let f = i(args)
+    for (let i = 0; i < array.length; i++) {
+      if (f(array[i])) {
+        array.pop()
+      } else {
+        return array
       }
-    } else {
-      for (let i = array.length - 1; i >= 0; i--) {
-        if (f(array[i])) array.pop()
-      }
-      return array
     }
   }
 
   function dropWhile(array, args) {
-    let f = i2(args)
-    let res = []
-    if (type(args) == 'string') {
-      for (let i = 0; i < array.length; i++) {
-        if (!f(array[i])) res.push(array[i])
-      }
-    } else {
-      for (let i = 0; i < array.length; i++) {
-        if (f(array[i])) {
-          continue
-        } else {
-          res.push(array[i])
-        }
+    let f = i(args)
+    for (let i = 0; i < array.length; i++) {
+      if (f(array[i])) {
+        array.shift()
+      } else {
+        return array
       }
     }
-    return res
   }
 
   function intersection(...array) {
     return array[0].filter((a, index) => {
       if (array[1].indexOf(a) == -1) {
-        return true
-      } else {
         return false
+      } else {
+        return true
       }
     })
   }
 
   function intersectionBy(array, array1, iteratee) {
     let f = i(iteratee)
-    let temp = array.map((a, b) => f(a))
-    return array1.filter((a, b) => {
+    let temp = array1.map((a, b) => f(a))
+    return array.filter((a, b) => {
       if (temp.indexOf(f(a)) == -1) {
-        return true
-      } else {
         return false
+      } else {
+        return true
       }
     })
   }
@@ -718,16 +707,8 @@ var coder_shui = function () {
     return array
   }
 
-  function pullAllWith(array, ...values) {
-    let comparator = arguments[arguments.length - 1]
-    array.forEach((a, b, c) => {
-
-    })
-    values.length = values.length - 1
-    remove(array, (a) => {
-      comparator(a, values[0])
-    })
-    return array
+  function pullAllWith(array, values, comparator) {
+    return remove(array, (a) => values.filter((b) => comparator(a, b)))
   }
   return {
     pullAllWith,
