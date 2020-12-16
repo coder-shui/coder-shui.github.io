@@ -711,8 +711,28 @@ var coder_shui = function () {
     return array
   }
 
+  function pullAll(array, values) {
+    remove(array, function (a, b, c) {
+      return values.indexOf(a) !== -1
+    })
+    return array
+  }
 
+  function pullAllWith(array, ...values) {
+    let comparator = arguments[arguments.length - 1]
+    array.forEach((a, b, c) => {
+
+    })
+    values.length = values.length - 1
+    remove(array, (a) => {
+      comparator(a, values[0])
+    })
+    return array
+  }
   return {
+    pullAllWith,
+    pullAll,
+    pull,
     nth,
     intersectionWith,
     intersectionBy,
