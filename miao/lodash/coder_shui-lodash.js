@@ -97,6 +97,26 @@ var coder_shui = function () {
       return a
     }
   }
+
+  function remove(array, fun) { //fun(array[i])为真,删除当前元素,并递归删除所有满足fun(为真的)元素,原地删除
+    let flag = 1
+    for (let i = 0; i < array.length; i++) {
+      if (fun(array[i], i, array)) {
+        flag = 0
+        for (let j = i; j < array.length; j++) {
+          array[j] = array[j + 1]
+        }
+        array.length = array.length - 1
+        break
+      }
+    }
+    if (flag) {
+      return array
+    } else {
+      return remove(array, fun)
+    }
+  }
+
   //辅助函数
   function chunk(array, size) {
     if (array.length < size) {
@@ -658,10 +678,10 @@ var coder_shui = function () {
     })
   }
 
-  function intersectionBy(...array, iteratee) {
+  function intersectionBy(array, array1, iteratee) {
     let f = i(iteratee)
-    let temp = array[0].map((a, b) => f(a))
-    return array[1].filter((a, b) => {
+    let temp = array.map((a, b) => f(a))
+    return array1.filter((a, b) => {
       if (temp.indexOf(f(a)) == -1) {
         return true
       } else {
@@ -678,7 +698,22 @@ var coder_shui = function () {
     })
     return res
   }
+
+  function nth(array, n = 0) {
+    if (n < 0) n = array.length + n
+    return array[n]
+  }
+
+  function pull(array, ...values) {
+    remove(array, function (a, b, c) {
+      return values.indexOf(a) !== -1
+    })
+    return array
+  }
+
+
   return {
+    nth,
     intersectionWith,
     intersectionBy,
     intersection,

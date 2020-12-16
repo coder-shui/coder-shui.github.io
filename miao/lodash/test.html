@@ -160,22 +160,33 @@
       })
       return res
     }
-    cc = intersectionWith([{
-      "x": 1,
-      "y": 2
-    }, {
-      "x": 2,
-      "y": 1
-    }], [{
-      "x": 1,
-      "y": 1
-    }, {
-      "x": 1,
-      "y": 2
-    }], function (n, t) {
-      return Nt(n, t);
-    })
-    console.log(cc);
+
+    function remove(array, fun) { //fun(array[i])为真,删除当前元素,并递归删除所有满足fun(为真的)元素,原地删除
+      let flag = 1
+      for (let i = 0; i < array.length; i++) {
+        if (fun(array[i], i, array)) {
+          flag = 0
+          for (let j = i; j < array.length; j++) {
+            array[j] = array[j + 1]
+          }
+          array.length = array.length - 1
+          break
+        }
+      }
+      if (flag) {
+        return array
+      } else {
+        return remove(array, fun)
+      }
+    }
+
+    function pull(array, ...values) {
+      remove(array, function (a, b, c) {
+        return values.indexOf(a) !== -1
+      })
+      return array
+    }
+    console.log(pull(["a", "b", "c", "a", "b", "c"], "a", "c"));
   </script>
 </body>
 
