@@ -361,29 +361,6 @@ var coder_shui = function () {
     return array
   }
 
-  function sortedIndex(array, value) {
-    if (array[0] > value) return 0
-    if (array[array.length - 1] < value) return array.length
-    let l = 0,
-      r = array.length - 1,
-      pivot
-    while (l <= r) {
-      pivot = Math.floor(l + (r - l) / 2)
-      if (value === array[pivot]) {
-        let i = pivot
-        while (array[i] == value) {
-          i--
-        }
-        return i + 1
-      } else if (value > array[pivot]) {
-        l = pivot + 1
-      } else {
-        r = pivot - 1
-      }
-    }
-    return pivot
-  }
-
   function every(array, f) {
     if (typeof (f) == 'function') {
       if (!array[0]) return true
@@ -637,7 +614,7 @@ var coder_shui = function () {
 
   function dropRightWhile(array, args) {
     let f = i(args)
-    for (let i = 0; i < array.length; i++) {
+    for (let i = array.length - 1; i >= 0; i--) {
       if (f(array[i])) {
         array.pop()
       } else {
@@ -648,13 +625,14 @@ var coder_shui = function () {
 
   function dropWhile(array, args) {
     let f = i(args)
-    for (let i = 0; i < array.length; i++) {
-      if (f(array[i])) {
+    while (array[0]) {
+      if (f(array[0])) {
         array.shift()
       } else {
-        return array
+        break
       }
     }
+    return array
   }
 
   function intersection(...array) {
@@ -708,7 +686,35 @@ var coder_shui = function () {
   }
 
   function pullAllWith(array, values, comparator) {
-    return remove(array, (a) => values.filter((b) => comparator(a, b)))
+    values.forEach((a) => array.filter((b) => comparator(a, b)))
+    return array
+  }
+
+  function sortedIndex(array, value) {
+    if (array[0] > value) return 0
+    if (array[array.length - 1] < value) return array.length
+    let l = 0,
+      r = array.length - 1,
+      pivot
+    while (l <= r) {
+      pivot = Math.floor(l + (r - l) / 2)
+      if (value === array[pivot]) {
+        let i = pivot
+        while (array[i] == value) {
+          i--
+        }
+        return i + 1
+      } else if (value > array[pivot]) {
+        l = pivot + 1
+      } else {
+        r = pivot - 1
+      }
+    }
+    return pivot
+  }
+
+  function sortedIndexBy(array, value, iteratee) {
+
   }
   return {
     pullAllWith,
