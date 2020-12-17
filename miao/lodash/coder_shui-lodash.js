@@ -15,6 +15,8 @@ var coder_shui = function () {
   function isEqual(a, b) {
     if (type(a) !== type(b)) {
       return false
+    } else if (a !== a && b !== b) {
+      return true
     } else if (type(a) === 'object') {
       for (let i in a) {
         if (!b[i] || !isEqual(a[i], b[i])) {
@@ -26,6 +28,7 @@ var coder_shui = function () {
           return false
         }
       }
+      return true
     } else if (type(a) === 'array') {
       if (a.length !== b.length) {
         return false
@@ -36,34 +39,11 @@ var coder_shui = function () {
           }
         }
       }
-    } else if (type(a) === 'number' || type(a) === 'string' || type(a) === 'boolean' || type(a) === 'undefined' ||
-      a !== a && b !== b) {
       return true
+    } else if (type(a) === 'number' || type(a) === 'string' || type(a) === 'boolean' || type(a) === 'undefined') {
+      return a === b
     } else {
       return true
-    }
-  }
-
-  function i(args) { //string 返回 o[args] 
-    if (type(args) == 'string') {
-      return function (o) {
-        return o[args]
-      }
-    } else if (type(args) == 'array') {
-      return function (o) {
-        return o[args[0]] === args[1]
-      }
-    } else if (type(args) == 'object') {
-      return function (o) {
-        for (let k in args) {
-          if (!o[k] || o[k] !== args[k]) {
-            return false
-          }
-        }
-        return true
-      }
-    } else if (type(args) == 'function') {
-      return args
     }
   }
 
@@ -93,6 +73,30 @@ var coder_shui = function () {
       return a
     }
   }
+
+  function i(args) { //string 返回 o[args] 
+    if (type(args) == 'string') {
+      return function (o) {
+        return args in o
+      }
+    } else if (type(args) == 'array') {
+      return function (o) {
+        return o[args[0]] === args[1]
+      }
+    } else if (type(args) == 'object') {
+      return function (o) {
+        for (let k in args) {
+          if (!o[k] || o[k] !== args[k]) {
+            return false
+          }
+        }
+        return true
+      }
+    } else if (type(args) == 'function') {
+      return args
+    }
+  }
+
 
   function remove(array, fun) { //fun(array[i])为真,删除当前元素,并递归删除所有满足fun(为真的)元素,原地删除
     let flag = 1
@@ -682,14 +686,11 @@ var coder_shui = function () {
   }
 
   function pullAllBy(array, values, iteratee) {
-    let f = i(iteratee)
-    array.filter((a) => values.map((a) => f(a)).indexOf(f(a)) == -1)
-    return array
+    return array.filter((a) => values.map((b) => b[iteratee]).indexOf(a[iteratee]) == -1)
   }
 
   function pullAllWith(array, values, comparator) {
-    array.filter((b) => comparator(b, ...values))
-    return array
+    return array.filter((b) => !comparator(...values, b))
   }
 
   function sortedIndex(array, value) {
@@ -773,7 +774,88 @@ var coder_shui = function () {
     let temp = array.map((a) => f(a))
     return sortedLastIndex(temp, f(value))
   }
+
+
+  function sortedLastIndexOf(array, value) {
+    if (array[0] > value) return 0
+    if (array[array.length - 1] < value) return array.length
+    let l = 0,
+      r = array.length - 1,
+      pivot
+    while (l <= r) {
+      pivot = Math.floor(l + (r - l) / 2)
+      if (value === array[pivot]) {
+        let i = pivot
+        while (array[i] == value) {
+          i++
+        }
+        return i - 1
+      } else if (value > array[pivot]) {
+        l = pivot + 1
+      } else {
+        r = pivot - 1
+      }
+    }
+    return -1
+  }
+
+  function sortedUniq(array) {
+    return array.filter((a, b, c) => a !== c[b + 1])
+  }
+
+  function tail(array) {
+    for (let i = 0; i < array.length; i++) {
+      array[i] = array[i + 1]
+    }
+    array.pop()
+    return array
+  }
+
+  function take(array, n = 1) {
+    return array.filter((_, b) => b < n)
+  }
+
+  function takeRight(array, n = 1) {
+    return array.filter((_, b) => b >= array.length - n)
+  }
+
+  function takeRightWhile(array, predicate) {
+    let f = i2(predicate)
+    let res = []
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (f(array[i])) {
+        res.unshift(array[i])
+      } else {
+        break
+      }
+    }
+    return res
+  }
+
+  function takeWhile(array, predicate) {
+    let f = i2(predicate)
+    let res = []
+    for (let i = 0; i < array.length; i++) {
+      if (f(array[i])) {
+        res.push(a)
+      } else {
+        break
+      }
+    }
+    return res
+  }
+
+  function union(...array) {
+
+  }
   return {
+    takeWhile,
+    takeRightWhile,
+    takeRight,
+    take,
+    tail,
+    sortedUniq,
+    sortedLastIndexOf,
     sortedLastIndexBy,
     sortedLastIndex,
     sortedIndexOf,

@@ -25,6 +25,8 @@
     function isEqual(a, b) {
       if (type(a) !== type(b)) {
         return false
+      } else if (a !== a && b !== b) {
+        return true
       } else if (type(a) === 'object') {
         for (let i in a) {
           if (!b[i] || !isEqual(a[i], b[i])) {
@@ -36,6 +38,7 @@
             return false
           }
         }
+        return true
       } else if (type(a) === 'array') {
         if (a.length !== b.length) {
           return false
@@ -46,153 +49,15 @@
             }
           }
         }
-      } else if (type(a) === 'number' || type(a) === 'string' || type(a) === 'boolean' || type(a) === 'undefined' ||
-        a !== a && b !== b) {
         return true
+      } else if (type(a) === 'number' || type(a) === 'string' || type(a) === 'boolean' || type(a) === 'undefined') {
+        return a === b
       } else {
         return true
       }
     }
 
-    function i2(a) {
-      if (type(a) == 'string') {
-        return function (o) {
-          if (a in o) {
-            return true
-          } else {
-            return false
-          }
-        }
-      } else if (type(a) == 'array') {
-        return function (o) {
-          if (a[0] in o && o[a[0]] === a[1]) {
-            return true
-          } else {
-            return false
-          }
-        }
-      } else if (type(a) == 'object') {
-        return function (o) {
-          for (let i in a) {
-            if (!(i in o) || o[i] !== a[i]) {
-              return false
-            }
-          }
-          return true
-        }
-      } else {
-        return a
-      }
-    }
-
-    function dropRightWhile(array, args) {
-      let f = i2(args)
-      for (let i = array.length - 1; i >= 0; i--) {
-        if (f(array[i])) array.pop()
-      }
-      return array
-    }
-    console.log(dropRightWhile([{
-      "user": "barney",
-      "active": true
-    }, {
-      "user": "fred",
-      "active": false
-    }, {
-      "user": "pebbles",
-      "active": false
-    }], {
-      "user": "pebbles",
-      "active": false
-    }));
-    let a = i2({
-      "user": "pebbles",
-      "active": false
-    })
-    let b = [{
-      "user": "barney",
-      "active": true
-    }, {
-      "user": "fred",
-      "active": false
-    }, {
-      "user": "pebbles",
-      "active": false
-    }]
-    console.log(dropRightWhile(b, a));
-
-    function i2(a) {
-      if (type(a) == 'string') {
-        return function (o) {
-          if (a in o) {
-            return true
-          } else {
-            return false
-          }
-        }
-      } else if (type(a) == 'array') {
-        return function (o) {
-          if (a[0] in o && o[a[0]] === a[1]) {
-            return true
-          } else {
-            return false
-          }
-        }
-      } else if (type(a) == 'object') {
-        return function (o) {
-          for (let i in a) {
-            if (!(i in o) || o[i] !== a[i]) {
-              return false
-            }
-          }
-          return true
-        }
-      } else {
-        return a
-      }
-    }
-
-    function intersectionWith(...array) {
-      let comparator = arguments[arguments.length - 1]
-      let res = []
-      array[1].forEach((a, b, arr) => {
-        res = res.concat(array[0].filter((c, d, ar) => comparator(a, c)))
-      })
-      return res
-    }
-
-    function remove(array, fun) { //fun(array[i])为真,删除当前元素,并递归删除所有满足fun(为真的)元素,原地删除
-      let flag = 1
-      for (let i = 0; i < array.length; i++) {
-        if (fun(array[i], i, array)) {
-          flag = 0
-          for (let j = i; j < array.length; j++) {
-            array[j] = array[j + 1]
-          }
-          array.length = array.length - 1
-          break
-        }
-      }
-      if (flag) {
-        return array
-      } else {
-        return remove(array, fun)
-      }
-    }
-
-    function dropWhile(array, args) {
-      let f = i2(args)
-      while (array[0]) {
-        if (f(array[0])) {
-          array.shift()
-        } else {
-          break
-        }
-      }
-      return array
-    }
-
-    function i2(a) { //string 返回  o[a] 
+    function i(a) { //string 返回  o[a] 
       if (type(a) == 'string') {
         return function (o) {
           return o[a]
@@ -218,19 +83,21 @@
         return a
       }
     }
-    console.log(dropWhile([{
-      "user": "barney",
-      "active": false
-    }, {
-      "user": "fred",
-      "active": false
-    }, {
-      "user": "pebbles",
-      "active": true
-    }], {
-      "user": "barney",
-      "active": false
-    }));
+
+
+    //测试代码
+    // function tail(array) {
+    //   array.forEach(function (a, b, c) {
+    //     a = c[b + 1]
+    //   });
+    //   console.log(array);
+    //   array.pop()
+    //   return array
+    // }
+    function takeRight(array, n = 1) {
+      return array.filter((_, b) => b >= array.length - n)
+    }
+    console.log(takeRight([1, 2, 3], 0));
   </script>
 </body>
 
