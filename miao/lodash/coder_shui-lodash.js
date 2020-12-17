@@ -770,9 +770,10 @@ var coder_shui = function () {
   }
 
   function sortedLastIndexBy(array, value, iteratee) {
-    let f = i(iteratee)
-    let temp = array.map((a) => f(a))
-    return sortedLastIndex(temp, f(value))
+    let f = i2(iteratee)
+    let a = array.map((a) => f(a))
+    let b = f(value)
+    return sortedLastIndex(a, b)
   }
 
 
@@ -801,6 +802,20 @@ var coder_shui = function () {
 
   function sortedUniq(array) {
     return array.filter((a, b, c) => a !== c[b + 1])
+  }
+
+  function sortedUniqBy(array, iteratee) {
+    let f = i2(iteratee)
+    let temp = []
+    let res = []
+    let m = array.map((a) => f(a))
+    array.forEach((a, b, c) => {
+      if (temp.indexOf(f(a)) == -1) {
+        temp.push(f(a))
+        res.push(a)
+      }
+    })
+    return res
   }
 
   function tail(array) {
@@ -837,7 +852,7 @@ var coder_shui = function () {
     let res = []
     for (let i = 0; i < array.length; i++) {
       if (f(array[i])) {
-        res.push(a)
+        res.push(array[i])
       } else {
         break
       }
@@ -846,14 +861,39 @@ var coder_shui = function () {
   }
 
   function union(...array) {
+    let temp = concat(...array)
+    let res = []
+    temp.forEach((a) => {
+      if (res.indexOf(a) == -1) {
+        res.push(a)
+      }
+    })
+    return res
+  }
 
+  function unionBy(...array) {
+    let temp = array[array.length - 1]
+    array.pop()
+    m = concat(...array)
+    return sortedUniqBy(m, temp)
+  }
+
+  function unionWith(...array) {
+    let f = i2(array[array.length - 1])
+    let res = []
+    array.pop()
+    array = concat(...array)
+    array.forEach((a))
   }
   return {
+    unionBy,
+    union,
     takeWhile,
     takeRightWhile,
     takeRight,
     take,
     tail,
+    sortedUniqBy,
     sortedUniq,
     sortedLastIndexOf,
     sortedLastIndexBy,

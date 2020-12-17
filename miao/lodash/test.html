@@ -57,7 +57,7 @@
       }
     }
 
-    function i(a) { //string 返回  o[a] 
+    function i2(a) { //string 返回  o[a] 
       if (type(a) == 'string') {
         return function (o) {
           return o[a]
@@ -84,20 +84,59 @@
       }
     }
 
+    function concat() {
+      if (!arguments[0]) return undefined
+      let arr = arguments[0]
+      for (let i = 1; i < arguments.length; i++) {
+        if (Array.isArray(arguments[i])) {
+          for (let j = 0; j < arguments[i].length; j++) {
+            arr.push(arguments[i][j])
+          }
+        } else if (arguments[i] !== undefined && arguments[i] !== null && arguments[i] == arguments[i]) arr.push(
+          arguments[i])
+      }
+      return arr
+    }
 
     //测试代码
-    // function tail(array) {
-    //   array.forEach(function (a, b, c) {
-    //     a = c[b + 1]
-    //   });
-    //   console.log(array);
-    //   array.pop()
-    //   return array
-    // }
-    function takeRight(array, n = 1) {
-      return array.filter((_, b) => b >= array.length - n)
+    function sortedLastIndex(array, value) {
+      if (array[0] > value) return 0
+      if (array[array.length - 1] < value) return array.length
+      let l = 0,
+        r = array.length - 1,
+        pivot
+      while (l <= r) {
+        pivot = Math.floor(l + (r - l) / 2)
+        if (value === array[pivot]) {
+          let i = pivot
+          while (array[i] == value) {
+            i++
+          }
+          return i
+        } else if (value > array[pivot]) {
+          l = pivot + 1
+        } else {
+          r = pivot - 1
+        }
+      }
+      return pivot
     }
-    console.log(takeRight([1, 2, 3], 0));
+
+    function sortedLastIndexBy(array, value, iteratee) {
+      let f = i2(iteratee)
+      let a = array.map((a) => f(a))
+      let b = f(value)
+      return sortedLastIndex(a, b)
+    }
+    console.log(sortedLastIndexBy([{
+      "x": 4
+    }, {
+      "x": 5
+    }], {
+      "x": 4
+    }, function (o) {
+      return o.x;
+    }))
   </script>
 </body>
 
