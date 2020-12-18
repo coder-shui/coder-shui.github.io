@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Complex(real, imag) {
+      if (real && imag) {
+        this.real = real
+        this.imag = imag
+      } else {
+        let str = arguments[0]
+        let index = a.indexOf('+')
+        let i = a.indexOf('i')
+        this.real = Number(a.slice(0, index))
+        this.imag = Number(a.silce(index + 1, i))
+      }
+      this.l = this.toString().length
+    }
+    Complex.prototype = {
+      constructor: Complex,
+      get length() {
+        // let a = this.toString()
+        // console.log(a);
+        // return a.length
+        // return this.tostring().length
+        return (this).toString().length
+      },
+      set length(val) {
+        return false
+      },
+      minus: function (a) {
+        return new Complex(this.real - a.real, this.imag - a.imag)
+      },
+      plus: function (a) {
+        return new Complex(this.real + a.real, this.imag + a.imag)
+      },
+      multiple: function (a) {
+        return new Complex(this.real * a.real, this.imag * a.imag)
+      },
+      division: function (a) {
+        return new Complex(this.real / a.real, this.imag / a.imag)
+      },
+      toString: function () {
+        return '' + this.real + '+' + this.imag + 'i'
+      }
+    }
+    let a = new Complex(2, 3)
+    console.log(a.length);
+  </script>
+</body>
+
+</html>

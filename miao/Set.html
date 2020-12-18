@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Set(ary) {
+      let temp = []
+      if (ary) {
+        for (let i = 0; i < ary.length; i++) {
+          if (temp.indexOf(ary[i]) == -1) {
+            temp[temp.length] = ary[i]
+          }
+        }
+      }
+      this.data = temp
+    }
+    Set.prototype = {
+      constructor: Set,
+      get size() {
+        return this.data.length
+      },
+      add: function (val) {
+        if (this.data.indexOf(val) == -1) {
+          this.data.push(val)
+          return this
+        }
+        return false
+      },
+      delete: function (val) {
+        if (val !== val) {
+          for (let i = 0; i < this.data.length; i++) {
+            if (this.data[i] !== this.data[i]) {
+              for (let j = i; j < this.data.length; j++) {
+                this.data[j] = this.data[j + 1]
+              }
+              this.data.pop()
+              return true
+            }
+          }
+          return false
+        } else {
+          let index = this.data.indexOf(val)
+          if (index == -1) {
+            return false
+          } else {
+            for (let i = index; i < this.data.length; i++) {
+              this.data[i] = this.data[i + 1]
+            }
+            (this.data).pop()
+            return this
+          }
+        }
+      },
+      has: function (val) {
+        return this.data.indexOf(val) !== -1
+      },
+      clear: function () {
+        this.data = []
+        return this
+      },
+    }
+    let s = new Set([1, 2, 3, 4, 5, 6])
+  </script>
+</body>
+
+</html>

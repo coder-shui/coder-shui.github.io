@@ -22,6 +22,25 @@
       }
     }
 
+    function remove(array, fun) { //fun(array[i])为真,删除当前元素,并递归删除所有满足fun(为真的)元素,原地删除
+      let flag = 1
+      for (let i = 0; i < array.length; i++) {
+        if (fun(array[i], i, array)) {
+          flag = 0
+          for (let j = i; j < array.length; j++) {
+            array[j] = array[j + 1]
+          }
+          array.length = array.length - 1
+          break
+        }
+      }
+      if (flag) {
+        return array
+      } else {
+        return remove(array, fun)
+      }
+    }
+
     function isEqual(a, b) {
       if (type(a) !== type(b)) {
         return false
@@ -99,44 +118,31 @@
     }
 
     //测试代码
-    function sortedLastIndex(array, value) {
-      if (array[0] > value) return 0
-      if (array[array.length - 1] < value) return array.length
-      let l = 0,
-        r = array.length - 1,
-        pivot
-      while (l <= r) {
-        pivot = Math.floor(l + (r - l) / 2)
-        if (value === array[pivot]) {
-          let i = pivot
-          while (array[i] == value) {
-            i++
+    function uniqWith(array, comparator) {
+      let f = i2(comparator)
+      console.log(f);
+      let res = []
+      console.log(array);
+      console.log(res);
+      array.forEach((a, b, c) => {
+        res.forEach((d, e, f) => {
+          if (comparator(a, d)) {
+            res[e] = 0
           }
-          return i
-        } else if (value > array[pivot]) {
-          l = pivot + 1
-        } else {
-          r = pivot - 1
-        }
-      }
-      return pivot
+        })
+      })
+      return res.filter((a) => a == 0)
     }
-
-    function sortedLastIndexBy(array, value, iteratee) {
-      let f = i2(iteratee)
-      let a = array.map((a) => f(a))
-      let b = f(value)
-      return sortedLastIndex(a, b)
-    }
-    console.log(sortedLastIndexBy([{
-      "x": 4
+    console.log(uniqWith([{
+      "x": 1,
+      "y": 2
     }, {
-      "x": 5
-    }], {
-      "x": 4
-    }, function (o) {
-      return o.x;
-    }))
+      "x": 2,
+      "y": 1
+    }, {
+      "x": 1,
+      "y": 2
+    }], isEqual))
   </script>
 </body>
 

@@ -880,12 +880,63 @@ var coder_shui = function () {
 
   function unionWith(...array) {
     let f = i2(array[array.length - 1])
+    let a1 = array[0]
+    let a2 = array[1]
+    a1.forEach((a) => {
+      a2.forEach((b, c, d) => {
+        if (f(a, b)) {
+          d[c] = 0 //直接b = 0 无效
+        }
+      })
+    })
+    return remove(concat(a1, a2), (a) => a == 0)
+  }
+
+  function uniq(array) {
     let res = []
-    array.pop()
-    array = concat(...array)
-    array.forEach((a))
+    array.forEach((a, b, c) => {
+      if (res.indexOf(a) == -1) {
+        res.push(a)
+      }
+    })
+    return res
+  }
+
+  function uniqBy(array, iteratee) {
+    let f = i2(iteratee)
+    let res = []
+    let arr = []
+    let temp = array.map((a) => f(a))
+    temp.forEach((a, b, c) => {
+      if (arr.indexOf(a) == -1) {
+        arr.push(a)
+        res.push(array[b])
+      }
+    })
+    return res
+  }
+
+  function uniqWith(array, comparator) {
+    let f = i2(comparator)
+    let res = array.slice()
+    array.forEach((a, b, c) => {
+      res.forEach((d, e, f) => {
+        if (f(a, d)) {
+          f[e] = 0
+        }
+      })
+    })
+    return res.filter((a) => a == 0)
+  }
+
+  function get(object, path, defaultValue) {
+
   }
   return {
+    uniqWith,
+    uniqBy,
+    uniq,
+    unionWith,
     unionBy,
     union,
     takeWhile,
