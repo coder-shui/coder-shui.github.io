@@ -117,6 +117,9 @@ var coder_shui = function () {
     }
   }
 
+  function sli(array, i, j) {
+    return sli.splice(i, j)
+  }
   //辅助函数
   function chunk(array, size) {
     if (array.length < size) {
@@ -918,21 +921,49 @@ var coder_shui = function () {
 
   function uniqWith(array, comparator) {
     let f = i2(comparator)
-    let res = array.slice()
+    let res = []
     array.forEach((a, b, c) => {
-      res.forEach((d, e, f) => {
-        if (f(a, d)) {
-          f[e] = 0
+      for (let i = b; i < array.length; i++) {
+        if (f(a, array[i])) {
+          continue
+        } else {
+          res.push(c[b])
         }
-      })
+      }
     })
-    return res.filter((a) => a == 0)
+    return res
   }
 
-  function get(object, path, defaultValue) {
+  function unzip(array) {
+    return array[0].map((_, c) => array.map((b) => b[c]))
+  }
 
+  function unzipWith(array, comparator) {
+    let f = i2(comparator)
+    return array[0].map((_, i) => array.reduce((sum, b, c, d) => {
+      return f(sum, b[i])
+    }, 0))
+  }
+
+  function without(array, ...values) {
+    return array.filter((a, b, c) => {
+      if (values.includes(a)) {
+        return false
+      } else return true
+    })
+  }
+
+  function xor(...array) {
+    let x = array.pop()
+    array.forEach((a, b, c) => {
+      x = union(x, a)
+    })
+    return x
   }
   return {
+    without,
+    unzipWith,
+    unzip,
     uniqWith,
     uniqBy,
     uniq,

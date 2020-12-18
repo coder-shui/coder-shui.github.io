@@ -117,32 +117,40 @@
       return arr
     }
 
-    //测试代码
-    function uniqWith(array, comparator) {
-      let f = i2(comparator)
-      console.log(f);
+    function flattenDeep(array) {
       let res = []
-      console.log(array);
-      console.log(res);
-      array.forEach((a, b, c) => {
-        res.forEach((d, e, f) => {
-          if (comparator(a, d)) {
-            res[e] = 0
-          }
-        })
-      })
-      return res.filter((a) => a == 0)
+      if (!Array.isArray(array)) return array
+      for (let i = 0; i < array.length; i++) {
+        if (Array.isArray(array[i])) {
+          concat(res, flattenDeep(array[i]))
+        } else {
+          res[res.length] = array[i]
+        }
+      }
+      return res
     }
-    console.log(uniqWith([{
-      "x": 1,
-      "y": 2
-    }, {
-      "x": 2,
-      "y": 1
-    }, {
-      "x": 1,
-      "y": 2
-    }], isEqual))
+
+    function union(...array) {
+      let temp = concat(...array)
+      let res = []
+      temp.forEach((a) => {
+        if (res.indexOf(a) == -1) {
+          res.push(a)
+        }
+      })
+      return res
+    }
+
+    function sli(array, i, j) {
+      return array.splice(i, j)
+    }
+    let add = (a, b) => a + b;
+    //测试代码
+    function xor(...array) {
+      let arr = flattenDeep(array)
+      return arr.filter((a, b, c) => (sli(c, b, 1)).indexOf(a) == -1)
+    }
+    console.log(xor([1, 2, 3, 4], [2, 3, 4, 5], [2, 4, 5, 6, 7], [5, 6, 7, 8]))
   </script>
 </body>
 
