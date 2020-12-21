@@ -142,15 +142,29 @@
     }
 
     function sli(array, i, j) {
-      return array.splice(i, j)
+      array.splice(i, j)
+      return array
     }
     let add = (a, b) => a + b;
     //测试代码
-    function xor(...array) {
+    function xorWith(...array) {
+      let f = i2(array.pop())
       let arr = flattenDeep(array)
-      return arr.filter((a, b, c) => (sli(c, b, 1)).indexOf(a) == -1)
+      return arr.filter((a, b, c) => sli(c, b, 1).every(x => !f(a, x)))
     }
-    console.log(xor([1, 2, 3, 4], [2, 3, 4, 5], [2, 4, 5, 6, 7], [5, 6, 7, 8]))
+    console.log(xorWith([{
+      "x": 1,
+      "y": 2
+    }, {
+      "x": 2,
+      "y": 1
+    }], [{
+      "x": 1,
+      "y": 1
+    }, {
+      "x": 1,
+      "y": 2
+    }], isEqual))
   </script>
 </body>
 

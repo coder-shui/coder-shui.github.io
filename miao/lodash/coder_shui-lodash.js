@@ -118,7 +118,8 @@ var coder_shui = function () {
   }
 
   function sli(array, i, j) {
-    return sli.splice(i, j)
+    array.splice(i, j)
+    return array
   }
   //辅助函数
   function chunk(array, size) {
@@ -954,13 +955,24 @@ var coder_shui = function () {
   }
 
   function xor(...array) {
-    let x = array.pop()
-    array.forEach((a, b, c) => {
-      x = union(x, a)
-    })
-    return x
+    let arr = flattenDeep(array)
+    return arr.filter((a, b, c) => (sli(c, b, 1)).indexOf(a) == -1)
+  }
+
+  function xorBy(...values) {
+    let f = i2(values.pop())
+    let arr = flattenDeep(values)
+    return arr.filter((a, b) => sli(arr.map((x) => f(x)), b, 1).indexOf(f(a)) == -1)
+  }
+
+  function xorWith(...array) {
+    let f = i2(array.pop())
+    let arr = flattenDeep(array)
+    return arr.filter((a, b, c) => sli(c, b, 1).every(x => !f(a, x)))
   }
   return {
+    xorBy,
+    xor,
     without,
     unzipWith,
     unzip,
