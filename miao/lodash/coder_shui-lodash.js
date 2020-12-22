@@ -121,7 +121,114 @@ var coder_shui = function () {
     array.splice(i, j)
     return array
   }
+
+  function match(str) {
+    return function (obj) {
+      let reg = /[a-zA-Z]/
+      for (let i = 0; i < str.length; i++) {
+        let c = str[i]
+        if (reg.test(c)) {
+          let j = i + 1
+          while (j < str.length && str[j] !== '.' && str[j] !== '[') {
+            j++
+          }
+          let temp = str.slice(i, j)
+          obj = obj[temp]
+          i = j - 1
+        } else if (c == '.') {
+          let j = i + 1
+          while (j < str.length && str[j] !== '.' && str[j] !== '[') {
+            j++
+          }
+          let temp = str.slice(i + 1, j)
+          obj = obj[temp]
+          i = j - 1
+        } else if (c == '[') {
+          let j = i + 1
+          while (j < str.length && str[j] !== ']') {
+            j++
+          }
+          let temp = str.slice(i + 1, j)
+          obj = obj[temp]
+          i = j - 1
+        }
+      }
+      return obj
+    }
+  }
   //辅助函数
+  function ary(f, n = f.length) { // f 为目标函数,其 length 属性 表示其形参的数量,
+    return function (...args) { //返回目标函数(形参最多为 n)的 版本
+      return f(...args.slice(0, n))
+    }
+  }
+
+  function before(n, f) { //前 n 次 使用 this 指向被创建出来的函数,并且 形参 为每次调用传过来的形参, 大于 n 次则返回第 n 次调用 它时返回的值 
+    let c = 0
+    let res
+    return function (...args) {
+      if (c <= n) {
+        res = f.call(this, ...args)
+        c++
+        return res
+      } else {
+        return res
+      }
+    }
+  }
+
+  function after(n, f) { // 返回一个函数 被调用 n 次以后 才开始调用原函数
+    let c = 0
+    return function (...args) {
+      c++
+      if (c > n) {
+        return f.call(this, ...args)
+      }
+    }
+  }
+
+  function flip(f) {
+    return function (...args) {
+      return f(args.reverse())
+    }
+  }
+
+  function negete(predicate) {
+    return function (...args) {
+      return !predicate(...args)
+    }
+  }
+
+  function spread(f, start = 0) {
+    return function (...args) {
+      return f.apply(this, ...args)
+    }
+  }
+
+  // function bind(f, thisArg, ...partials) {
+  //   return function (...args) {
+  //     var copy = partials.slice()
+  //     for (var i = 0; i < copy.length; i++) {
+  //       if (copy[i] === window) {
+  //         copy[i] = args.shift()
+  //       }
+  //     }
+  //     return f.call(thisArg, ...copy, ...args)
+  //   }
+  // }
+
+  function bind(f, thisArg, ...partials) { // 绑定 函数 f 的 this 为 thisArg, 并提供参数非顺序绑定, 空出来的参数 用 window 代替.
+    return function (...args) { //args 表示绑定后 传过来的参数 ,相当于 partials 的 windows 序列
+      let c = partials.slice() //纯函数,不改变外部变量
+      for (let i = 0; i < c.length; i++) {
+        if (c[i] !== window) { //如果 当前形参没有绑定过,即为 window , 就将 调用时传过来的 参数按顺序 赋值 给 window
+          c[i] = args.shift()
+        }
+      }
+      return f.call(thisArg, ...c)
+    }
+  }
+  // lodash function
   function chunk(array, size) {
     if (array.length < size) {
       return array
@@ -955,22 +1062,57 @@ var coder_shui = function () {
   }
 
   function xor(...array) {
-    let arr = flattenDeep(array)
-    return arr.filter((a, b, c) => (sli(c, b, 1)).indexOf(a) == -1)
+    return flattenDeep(array).filter((a, b, c) => sli(flattenDeep(array).slice(), b, 1).indexOf(a) == -1)
   }
 
   function xorBy(...values) {
     let f = i2(values.pop())
-    let arr = flattenDeep(values)
-    return arr.filter((a, b) => sli(arr.map((x) => f(x)), b, 1).indexOf(f(a)) == -1)
+    return flattenDeep(values).filter((a, b) => sli(flattenDeep(values).map((x) => f(x)), b, 1).indexOf(f(a)) == -1)
   }
 
   function xorWith(...array) {
-    let f = i2(array.pop())
-    let arr = flattenDeep(array)
-    return arr.filter((a, b, c) => sli(c, b, 1).every(x => !f(a, x)))
+    let f = i2((array.pop()))
+    return flattenDeep(array).filter((a, b, c) => sli(flattenDeep(array), b, 1).every(x => !f(a, x)))
   }
+
+  function zip(...array) {
+    return array[0].map((_, b) => array.map(a => a[b]))
+  }
+
+  function zipObject(...array) {
+    let res = {}
+    array[0].forEach((a, b, c) => res[a] = array[1][b])
+    return res
+  }
+
+
+
+  // function zipObjectDeep(...array) {
+  //   let reg = /[a-zA-Z]/
+  //   for (let i = 0; i < array[0].length; i++) {
+  //     let obj = array[1][i]
+  //     let s = array[0][i]
+  //     for (let j = s.length - 1; j >= 0; j--) {
+  //       let ss = s[j]
+  //       if (reg.test(ss)) {
+  //         let k = j - 1
+  //         while (k >= 0 && ss !== '.' && ss !== ']') {
+  //           k--
+  //         }
+  //         let temp = ss.slice(k + 1, i + 1)
+  //         let t = obj
+  //         obj
+  //         t[temp] = obj
+
+  //       }
+  //     }
+  //   }
+  // }
+
   return {
+    zipObject,
+    zip,
+    xorWith,
     xorBy,
     xor,
     without,
