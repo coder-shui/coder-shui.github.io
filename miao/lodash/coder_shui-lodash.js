@@ -228,6 +228,29 @@ var coder_shui = function () {
       return f.call(thisArg, ...c)
     }
   }
+
+  function bindKey(obj, key, partials) {
+    return bind(obj[key], obj[key], partials)
+  }
+
+  // function curry(f, arity = f.length) {
+  //   function a(...args) {
+  //     return f(...args)
+  //   }
+  //   if (a.length > )
+  // }
+
+
+
+  // high order function
+  // function flatten(ary) {
+  //   return [].concat(...ary)
+  // }
+
+  // function flatten(ary) {
+  //   return [].concat.apply([], ary)
+  // }
+  // const flatten = [].concat.apply.bind([].concat, [])
   // lodash function
   function chunk(array, size) {
     if (array.length < size) {
@@ -1085,31 +1108,58 @@ var coder_shui = function () {
     return res
   }
 
+  function zipWith(...array) {
+    let f = i2(array.pop())
+    let res = array[0].map((_, b) => array.map((d) => d[b]))
+    return res.map((a) => {
+      let temp = []
+      a.forEach(b => {
+        temp.push(b)
+      })
+      return f(...temp)
+    })
+  }
 
+  function countBy(collection, iteratee) {
+    let f = i2(iteratee)
+    let res = {}
+    collection.forEach((a, b, c) => {
+      if (f(a) in res) {
+        res[f(a)]++
+      } else {
+        res[f(a)] = 1
+      }
+    })
+    return res
+  }
 
-  // function zipObjectDeep(...array) {
-  //   let reg = /[a-zA-Z]/
-  //   for (let i = 0; i < array[0].length; i++) {
-  //     let obj = array[1][i]
-  //     let s = array[0][i]
-  //     for (let j = s.length - 1; j >= 0; j--) {
-  //       let ss = s[j]
-  //       if (reg.test(ss)) {
-  //         let k = j - 1
-  //         while (k >= 0 && ss !== '.' && ss !== ']') {
-  //           k--
-  //         }
-  //         let temp = ss.slice(k + 1, i + 1)
-  //         let t = obj
-  //         obj
-  //         t[temp] = obj
+  function findLast(array, predicate, index = array.length - 1) {
+    let f = i2(predicate)
+    for (let i = index; i >= 0; i--) {
+      if (f(array[i])) return array[i]
+    }
+    return -1
+  }
 
-  //       }
-  //     }
-  //   }
-  // }
+  function flatMap(array, iteratee) {
+    let f = i2(iteratee)
+    let res = []
+    array.forEach((a, b, c) => {
+      res = res.concat(f(a, b, c))
+    })
+    return res
+  }
 
+  function flatMapDeep(array, iteratee) {
+    let f = i2(iteratee)
+    return flattenDeep(array.map((a, b, c) => f(a, b, c)))
+  }
   return {
+    flatMapDeep,
+    flatMap,
+    findLast,
+    countBy,
+    zipWith,
     zipObject,
     zip,
     xorWith,
