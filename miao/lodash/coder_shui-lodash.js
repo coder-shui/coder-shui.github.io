@@ -1178,7 +1178,7 @@ var coder_shui = function () {
   }
 
   function forEachRight(array, iteratee) {
-    return forEach(array.reverse(), i2(iteratee))
+    return forEach(array.reverse(), i2(iteratee)).reverse()
   }
 
   function groupBy(array, iteratee = it => it) {
@@ -1258,8 +1258,8 @@ var coder_shui = function () {
   function map(array, iteratee) {
     let f = i2(iteratee)
     let res = []
-    for (let i = 0; i < array.length; i++) {
-      res.push(f(array[i]))
+    for (let i in array) {
+      res.push(f(array[i], i, array))
     }
     return res
   }
