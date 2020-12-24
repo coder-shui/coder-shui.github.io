@@ -1264,6 +1264,7 @@ var coder_shui = function () {
     return res
   }
   return {
+    map,
     keyBy,
     invokeMap,
     includes,
