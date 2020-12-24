@@ -279,17 +279,22 @@
     //   return res
     // }
     // console.log(zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]));
-    function sort() {
-      return this.sort((a, b) => a - b)
-    }
 
-    function invokeMap(array, f, ...args) {
-      return array.map(a => f.call(a, ...args))
+    function keyBy(array, iteratee) {
+      let f = i2(iteratee)
+      let res = {}
+      array.forEach(a => res[f(a)] = a)
+      return res
     }
-    console.log(invokeMap([
-      [5, 1, 7],
-      [3, 2, 1]
-    ], 'sort'));
+    console.log(keyBy([{
+      "dir": "left",
+      "code": 97
+    }, {
+      "dir": "right",
+      "code": 100
+    }], function (o) {
+      return String.fromCharCode(o.code)
+    }));
   </script>
 </body>
 

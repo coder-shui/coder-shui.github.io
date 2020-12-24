@@ -47,11 +47,47 @@ var coder_shui = function () {
     }
   }
 
+  function match(str) {
+    return function (obj) {
+      let reg = /[a-zA-Z]/
+      for (let i = 0; i < str.length; i++) {
+        let c = str[i]
+        if (reg.test(c)) {
+          let j = i + 1
+          while (j < str.length && str[j] !== '.' && str[j] !== '[') {
+            j++
+          }
+          let temp = str.slice(i, j)
+          obj = obj[temp]
+          i = j - 1
+        } else if (c == '.') {
+          let j = i + 1
+          while (j < str.length && str[j] !== '.' && str[j] !== '[') {
+            j++
+          }
+          let temp = str.slice(i + 1, j)
+          obj = obj[temp]
+          i = j - 1
+        } else if (c == '[') {
+          let j = i + 1
+          while (j < str.length && str[j] !== ']') {
+            j++
+          }
+          let temp = str.slice(i + 1, j)
+          obj = obj[temp]
+          i = j - 1
+        }
+      }
+      return obj
+    }
+  }
+
   function i2(a) { //string 返回  o[a] 
     if (type(a) == 'string') {
-      return function (o) {
-        return o[a]
-      }
+      // return function (o) {
+      //   return o[a]
+      // }
+      return match(a)
     } else if (type(a) == 'array') {
       return function (o) {
         if (a[0] in o && o[a[0]] === a[1]) {
@@ -122,40 +158,7 @@ var coder_shui = function () {
     return array
   }
 
-  function match(str) {
-    return function (obj) {
-      let reg = /[a-zA-Z]/
-      for (let i = 0; i < str.length; i++) {
-        let c = str[i]
-        if (reg.test(c)) {
-          let j = i + 1
-          while (j < str.length && str[j] !== '.' && str[j] !== '[') {
-            j++
-          }
-          let temp = str.slice(i, j)
-          obj = obj[temp]
-          i = j - 1
-        } else if (c == '.') {
-          let j = i + 1
-          while (j < str.length && str[j] !== '.' && str[j] !== '[') {
-            j++
-          }
-          let temp = str.slice(i + 1, j)
-          obj = obj[temp]
-          i = j - 1
-        } else if (c == '[') {
-          let j = i + 1
-          while (j < str.length && str[j] !== ']') {
-            j++
-          }
-          let temp = str.slice(i + 1, j)
-          obj = obj[temp]
-          i = j - 1
-        }
-      }
-      return obj
-    }
-  }
+
   //辅助函数
   function ary(f, n = f.length) { // f 为目标函数,其 length 属性 表示其形参的数量,
     return function (...args) { //返回目标函数(形参最多为 n)的 版本
@@ -1171,10 +1174,11 @@ var coder_shui = function () {
         break
       }
     }
+    return array
   }
 
   function forEachRight(array, iteratee) {
-    forEach(array.reverse(), i2(iteratee))
+    return forEach(array.reverse(), i2(iteratee))
   }
 
   function groupBy(array, iteratee = it => it) {
@@ -1228,18 +1232,39 @@ var coder_shui = function () {
     }
   }
 
-  function sort() {
-    return this.sort((a, b) => a - b)
+  function invokeMap(array, f, ...args) {
+    if (type(f) == 'function') {
+      return array.map(a => f.call(a, ...args))
+    } else {
+      return array.map(a => a[f].apply(a, ...args))
+    }
   }
 
-  function invokeMap(array, f, ...args) { // ????
-    return array.map(a => f.call(a, ...args))
-  }
+  // function sort() {
+  //   return this.sort((a, b) => a - b)
+  // }
+
+  // function invokeMap(array, f, ...args) { // ????
+  //   return array.map(a => f.call(a, ...args))
+  // }
 
   function keyBy(array, iteratee) {
+    let f = i2(iteratee)
+    let res = {}
+    array.forEach(a => res[f(a)] = a)
+    return res
+  }
 
+  function map(array, iteratee) {
+    let f = i2(iteratee)
+    let res = []
+    for (let i = 0; i < array.length; i++) {
+      res.push(f(array[i]))
+    }
+    return res
   }
   return {
+    keyBy,
     invokeMap,
     includes,
     groupBy,
