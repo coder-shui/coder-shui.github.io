@@ -233,12 +233,15 @@ var coder_shui = function () {
     return bind(obj[key], obj[key], partials)
   }
 
-  // function curry(f, arity = f.length) {
-  //   function a(...args) {
-  //     return f(...args)
-  //   }
-  //   if (a.length > )
-  // }
+  function curry(f, arity = f.length) { // 返回一个函数 f 的柯里化版本, arity 表示 执行函数的 参数的最小数量(默认等于函数的length(形参数量)), 
+    return function (...args) { // 如果 接受的参数不够,则继续返回 绑定 接受参数以后的函数的 柯里化版本,否则 就直接运行 函数
+      if (args.length < arity) {
+        return curry(f.bind(null, ...args), arity - args.length) // arity 随着接受更多的参数 而减少
+      } else {
+        return f(args)
+      }
+    }
+  }
 
 
 
@@ -418,12 +421,12 @@ var coder_shui = function () {
 
   function flatten(array) {
     let res = []
-    let flag = 0
+    // let flag = 0
     for (let i = 0; i < array.length; i++) {
-      if (Array.isArray(array[i]) && flag == 0) {
+      if (Array.isArray(array[i])) {
         for (let j = 0; j < array[i].length; j++) {
           res[res.length] = array[i][j]
-          flag = 1
+          // flag = 1
         }
       } else res[res.length] = array[i]
     }
@@ -1154,7 +1157,95 @@ var coder_shui = function () {
     let f = i2(iteratee)
     return flattenDeep(array.map((a, b, c) => f(a, b, c)))
   }
+
+  function flatMapDepth(array, iteratee, depth = 1) {
+    let f = i2(iteratee)
+    let res = array.map((a, b, c) => f(a, b, c))
+    return flattenDepth(res, depth)
+  }
+
+  function forEach(array, iteratee) {
+    let f = i2(iteratee)
+    for (let i in array) {
+      if (!f(array[i], i, array)) {
+        break
+      }
+    }
+  }
+
+  function forEachRight(array, iteratee) {
+    forEach(array.reverse(), i2(iteratee))
+  }
+
+  function groupBy(array, iteratee = it => it) {
+    let f = i2(iteratee)
+    let res = {}
+    array.forEach((a, b, c) => {
+      if (f(a) in res) {
+        res[f(a)].push(a)
+      } else {
+        res[f(a)] = [a]
+      }
+    })
+    return res
+  }
+
+  function includes(collection, value, fromIndex = 0) {
+    if (type(collection) == 'array') {
+      if (fromIndex < 0) {
+        fromIndex = collection.length + fromIndex
+      }
+      for (let i = fromIndex; i < collection.length; i++) {
+        if (collection[i] == value) return true
+      }
+      return false
+    } else if (type(collection) == 'object') {
+      for (let i in collection) {
+        if (collection[i] == value) {
+          return true
+        }
+      }
+      return false
+    } else if (type(collection) == 'string') {
+      if (fromIndex < 0) {
+        fromIndex = collection.length + fromIndex
+      }
+      for (let i = fromIndex; i < collection.length; i++) {
+        if (collection[i] == value[0]) {
+          let flag = 1
+          for (let j = 1; j < value.length; j++) {
+            if (collection[i + j] !== value[j]) {
+              flag = 0
+              break
+            }
+          }
+          if (flag) {
+            return true
+          }
+        }
+      }
+      return false
+    }
+  }
+
+  function sort() {
+    return this.sort((a, b) => a - b)
+  }
+
+  function invokeMap(array, f, ...args) { // ????
+    return array.map(a => f.call(a, ...args))
+  }
+
+  function keyBy(array, iteratee) {
+
+  }
   return {
+    invokeMap,
+    includes,
+    groupBy,
+    forEachRight,
+    forEach,
+    flatMapDepth,
     flatMapDeep,
     flatMap,
     findLast,
