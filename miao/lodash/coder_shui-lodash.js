@@ -1258,12 +1258,36 @@ var coder_shui = function () {
   function map(array, iteratee) {
     let f = i2(iteratee)
     let res = []
-    for (let i in array) {
-      res.push(f(array[i], i, array))
+    if (type(array) == 'object') {
+      for (let i in array) {
+        res.push(f(array[i], i, array))
+      }
+    } else if (type(array) == 'array') {
+      for (let i = 0; i < array.length; i++) {
+        res.push(f(array[i], i, array))
+      }
+    }
+    return res
+  }
+
+  function orderBy(array, iteratee, orders) {
+    if (type(iteratee) !== 'array') iteratee = [iteratee]
+    if (type(orders) !== 'array') orders = [orders]
+    let res = array.slice()
+    for (let i = iteratee.length - 1; i >= 0; i--) {
+      let f = i2(iteratee[i])
+      let o = orders[i]
+      if (type(f(array[0])) == 'string') {
+        res = o == 'asc' ? res.sort((a, b) => f(a).charCodeAt(0) - f(b).charCodeAt(0)) : res.sort((a, b) => f(b)
+          .charCodeAt(0) - f(a).charCodeAt(0))
+      } else {
+        res = o == 'asc' ? res.sort((a, b) => f(a) - f(b)) : res.sort((a, b) => f(b) - f(a))
+      }
     }
     return res
   }
   return {
+    orderBy,
     map,
     keyBy,
     invokeMap,
