@@ -216,6 +216,51 @@
         return -1
       }
     }
+
+    function negete(predicate) {
+      return function (...args) {
+        return !predicate(...args)
+      }
+    }
+
+    function filter(array, f) {
+      let res = []
+      if (typeof (f) == 'function') {
+        for (let i = 0; i < array.length; i++) {
+          if (f(array[i])) res.push(array[i])
+        }
+      } else if (Array.isArray(f)) {
+        for (let i = 0; i < array.length; i++) {
+          if (array[i][f[0]] == f[1]) {
+            res.push(array[i])
+          }
+        }
+      } else if (typeof (f) == 'object') {
+        for (let i = 0; i < array.length; i++) {
+          let flag = 1
+          for (let j in f) {
+            if (!array[i][j] || array[i][j] !== f[j]) {
+              flag = 0
+              break
+            }
+          }
+          if (flag) {
+            res.push(array[i])
+          }
+        }
+      } else {
+        for (let i = 0; i < array.length; i++) {
+          if (array[i][f]) {
+            res.push(array[i])
+          }
+        }
+      }
+      return res
+    }
+
+    function xor(...array) {
+      return flattenDeep(array).filter((a, b, c) => sli(flattenDeep(array).slice(), b, 1).indexOf(a) == -1)
+    }
     //测试代码
     // function zipObjectDeep(...array) {
     //   debugger
@@ -280,36 +325,28 @@
     // }
     // console.log(zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]));
 
-    function partition(array, predicate) {
-      let f = i2(predicate)
-      let res = [
-        [],
-        []
-      ]
-      array.forEach(a => {
-        if (f(a)) {
-          res[0].push(a)
-        } else {
-          res[1].push(a)
-        }
-      })
+    function sample(array, random = type(array) == 'array' ? (array.length * Math.random()) >> 0 : Object
+      .getOwnPropertyNames(array)[Object.getOwnPropertyNames(array).length * Math.random() >> 0]) {
+      return array[random]
+    }
+
+    function sampleSize(array, n = 1, res = []) {
+      let temp = sample(array)
+      res.push(temp)
+      n--
+      if (n > 0) {
+        if (type(array) == 'array') {
+          array.splice(array.indexOf(temp), 1)
+          sampleSize(array, n, res)
+        } else return 'is Not Array'
+      }
       return res
     }
-    console.log(partition([{
-      "user": "barney",
-      "age": 36,
-      "active": false
-    }, {
-      "user": "fred",
-      "age": 40,
-      "active": true
-    }, {
-      "user": "pebbles",
-      "age": 1,
-      "active": false
-    }], function (o) {
-      return o.active;
-    }));
+
+    function shuffle(array) {
+      return sampleSize(array, array.length)
+    }
+    console.log(shuffle([1, 2, 3, 4]));
   </script>
 </body>
 

@@ -1332,7 +1332,68 @@ var coder_shui = function () {
       return accumulator
     }
   }
+
+  function reject(array, predicate) {
+    return xor(filter(array, predicate), array)
+  }
+
+  function sample(array, random = type(array) == 'array' ? (array.length * Math.random()) >> 0 : Object
+    .getOwnPropertyNames(array)[Object.getOwnPropertyNames(array).length * Math.random() >> 0]) {
+    return array[random]
+  }
+
+  function sampleSize(array, n = 1, res = []) {
+    let temp = sample(array)
+    res.push(temp)
+    n--
+    if (n > 0) {
+      if (type(array) == 'array') {
+        array.splice(array.indexOf(temp), 1)
+        sampleSize(array, n, res)
+      } else return 'is Not Array'
+    }
+    return res
+  }
+
+  function shuffle(array) {
+    return sampleSize(array, array.length)
+  }
+
+  function size(array) {
+    if (type(array) == 'object') {
+      return Object.keys(array).length
+    } else {
+      return array.length
+    }
+  }
+
+  function some(array, predicate) {
+    let f = i2(predicate)
+    for (let i in array) {
+      if (f(array[i])) return true
+    }
+    return false
+  }
+
+  function every(array, predicate) {
+    let f = i2(predicate)
+    for (let i in array) {
+      if (!f(array[i])) return false
+    }
+    return true
+  }
+
+  function sortBy(array, iteratee) {
+
+  }
   return {
+    every,
+    some,
+    size,
+    shuffle,
+    sampleSize,
+    sample,
+    reject,
     reduceRight,
     reduce,
     partition,
