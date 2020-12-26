@@ -1286,7 +1286,32 @@ var coder_shui = function () {
     }
     return res
   }
+
+  function partition(array, predicate) {
+    let f = i2(predicate)
+    let res = [
+      [],
+      []
+    ]
+    array.forEach(a => {
+      if (f(a)) {
+        res[0].push(a)
+      } else {
+        res[1].push(a)
+      }
+    })
+    return res
+  }
+
+  function reduce(array, iteratee, accumulator) {
+    for (let i in array) {
+      accumulator = iteratee(accumulator, array[i], i)
+    }
+    return accumulator
+  }
   return {
+    reduce,
+    partition,
     orderBy,
     map,
     keyBy,

@@ -280,40 +280,36 @@
     // }
     // console.log(zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]));
 
-    function orderBy(array, iteratee, orders) {
-      if (type(iteratee) !== 'array') iteratee = [iteratee]
-      if (type(orders) !== 'array') orders = [orders]
-      let res = array.slice()
-      for (let i = iteratee.length - 1; i >= 0; i--) {
-        let f = i2(iteratee[i])
-        let o = orders[i]
-        if (type(f(array[0])) == 'string') {
-          res = o == 'asc' ? res.sort((a, b) => f(a).charCodeAt(0) - f(b).charCodeAt(0)) : res.sort((a, b) => f(b)
-            .charCodeAt(0) - f(a).charCodeAt(0))
+    function partition(array, predicate) {
+      let f = i2(predicate)
+      let res = [
+        [],
+        []
+      ]
+      array.forEach(a => {
+        if (f(a)) {
+          res[0].push(a)
         } else {
-          res = o == 'asc' ? res.sort((a, b) => f(a) - f(b)) : res.sort((a, b) => f(b) - f(a))
+          res[1].push(a)
         }
-      }
+      })
       return res
     }
-    // array.sort((a, b) => {
-    //   if (f(a) == f(b)) {
-    //     return f1(a) - f1(b)
-    //   }
-    // })
-    console.log(orderBy([{
-      "user": "fred",
-      "age": 48
-    }, {
+    console.log(partition([{
       "user": "barney",
-      "age": 34
+      "age": 36,
+      "active": false
     }, {
       "user": "fred",
-      "age": 40
+      "age": 40,
+      "active": true
     }, {
-      "user": "barney",
-      "age": 36
-    }], ['user', 'age'], ['asc', 'desc']));
+      "user": "pebbles",
+      "age": 1,
+      "active": false
+    }], function (o) {
+      return o.active;
+    }));
   </script>
 </body>
 
