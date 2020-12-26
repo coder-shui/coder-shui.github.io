@@ -1303,13 +1303,37 @@ var coder_shui = function () {
     return res
   }
 
-  function reduce(array, iteratee, accumulator) {
+  function reduce(array, iteratee, accumulator = type(array) == 'array' ? array[0] : array[Object.getOwnPropertyNames(array)[0]]) {
     for (let i in array) {
-      accumulator = iteratee(accumulator, array[i], i)
+      accumulator = iteratee(accumulator, array[i], i, array)
     }
     return accumulator
   }
+
+  function reduceRight(array, iteratee, accumulator = type(array) == 'array' ? array[array.length - 1] : array[Object.getOwnPropertyNames(array)[Object.getOwnPropertyNames(array).length - 1]]) {
+    if (type(array) == 'array') {
+      for (let i = array.length - 1; i >= 0; i--) {
+        accumulator = iteratee(accumulator, array[i], i, array)
+      }
+      return accumulator
+    } else {
+      let temp = []
+      for (let i in array) {
+        temp.push([i, array[i]])
+      }
+      temp = temp.reverse()
+      let obj = {}
+      temp.forEach(a => {
+        obj[a[0]] = a[1]
+      })
+      for (let j in obj) {
+        accumulator = iteratee(accumulator, arrat[j], j, array)
+      }
+      return accumulator
+    }
+  }
   return {
+    reduceRight,
     reduce,
     partition,
     orderBy,
