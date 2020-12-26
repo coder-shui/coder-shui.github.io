@@ -343,10 +343,13 @@
       return res
     }
 
-    function shuffle(array) {
-      return sampleSize(array, array.length)
+    function reject(array, predicate) {
+      let temp = filter(array, predicate)
+      return filter(array, (a => temp.indexOf(a) == -1))
     }
-    console.log(shuffle([1, 2, 3, 4]));
+    console.log(reject(["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"], function (s) {
+      return s.length > 4
+    }));
   </script>
 </body>
 

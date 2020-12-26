@@ -1304,7 +1304,12 @@ var coder_shui = function () {
   }
 
   function reduce(array, iteratee, accumulator = type(array) == 'array' ? array[0] : array[Object.getOwnPropertyNames(array)[0]]) {
+    let flag = (accumulator == array[0] || accumulator == array[Object.getOwnPropertyNames(array)[0]]) ? 0 : 1
     for (let i in array) {
+      if (flag == 0) {
+        flag++
+        continue
+      }
       accumulator = iteratee(accumulator, array[i], i, array)
     }
     return accumulator
@@ -1334,7 +1339,8 @@ var coder_shui = function () {
   }
 
   function reject(array, predicate) {
-    return xor(filter(array, predicate), array)
+    let temp = filter(array, predicate)
+    return filter(array, (a => temp.indexOf(a) == -1))
   }
 
   function sample(array, random = type(array) == 'array' ? (array.length * Math.random()) >> 0 : Object
