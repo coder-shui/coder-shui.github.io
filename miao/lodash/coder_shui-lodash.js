@@ -1390,9 +1390,43 @@ var coder_shui = function () {
   }
 
   function sortBy(array, iteratee) {
+    return orderBy(array, iteratee, s = type(iteratee) == 'array' ? new Array(iteratee.length).fill('asc') : null)
+  }
 
+  function defer(f, ...args) {
+    return setTimeout(f, 0, ...args) - 1
+  }
+
+  function delay(f, wait, ...args) {
+    return setTimeout(f, wait, ...args) - 1
+  }
+
+  function castArray(value) {
+    if (type(value) == 'array') {
+      return value
+    } else {
+      let res = []
+      for (let i = 0; i < arguments.length; i++) {
+        res.push(arguments[i])
+      }
+      return res
+    }
+  }
+
+  function conformsTo(obj, source) {
+    for (let i in obj) {
+      if (i in source) {
+        return source[i](obj[i])
+      }
+    }
+    return false
   }
   return {
+    conformsTo,
+    castArray,
+    defer,
+    delay,
+    sortBy,
     every,
     some,
     size,

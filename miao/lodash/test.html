@@ -261,6 +261,24 @@
     function xor(...array) {
       return flattenDeep(array).filter((a, b, c) => sli(flattenDeep(array).slice(), b, 1).indexOf(a) == -1)
     }
+
+    function orderBy(array, iteratee, orders) {
+      if (type(iteratee) !== 'array') iteratee = [iteratee]
+      if (type(orders) !== 'array') orders = [orders]
+      let res = array.slice()
+      for (let i = iteratee.length - 1; i >= 0; i--) {
+        let f = i2(iteratee[i])
+        let o = orders[i]
+        if (type(f(array[0])) == 'string') {
+          res = o == 'asc' ? res.sort((a, b) => f(a).charCodeAt(0) - f(b).charCodeAt(0)) : res.sort((a, b) => f(b)
+            .charCodeAt(0) - f(a).charCodeAt(0))
+        } else {
+          res = o == 'asc' ? res.sort((a, b) => f(a) - f(b)) : res.sort((a, b) => f(b) - f(a))
+        }
+      }
+      return res
+    }
+
     //测试代码
     // function zipObjectDeep(...array) {
     //   debugger
@@ -325,31 +343,18 @@
     // }
     // console.log(zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]));
 
-    function sample(array, random = type(array) == 'array' ? (array.length * Math.random()) >> 0 : Object
-      .getOwnPropertyNames(array)[Object.getOwnPropertyNames(array).length * Math.random() >> 0]) {
-      return array[random]
-    }
-
-    function sampleSize(array, n = 1, res = []) {
-      let temp = sample(array)
-      res.push(temp)
-      n--
-      if (n > 0) {
-        if (type(array) == 'array') {
-          array.splice(array.indexOf(temp), 1)
-          sampleSize(array, n, res)
-        } else return 'is Not Array'
+    function castArray(value) {
+      if (type(value) == 'array') {
+        return value
+      } else {
+        let res = []
+        for (let i = 0; i < arguments.length; i++) {
+          res.push(arguments[i])
+        }
+        return res
       }
-      return res
     }
-
-    function reject(array, predicate) {
-      let temp = filter(array, predicate)
-      return filter(array, (a => temp.indexOf(a) == -1))
-    }
-    console.log(reject(["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"], function (s) {
-      return s.length > 4
-    }));
+    console.log(castArray());
   </script>
 </body>
 
