@@ -1421,7 +1421,43 @@ var coder_shui = function () {
     }
     return false
   }
+
+  function eq(value, other) {
+    if (value !== value || other !== other) {
+      if (value !== value && other !== other) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return value === other
+    }
+  }
+
+  function gt(value, other) {
+    return value > other
+  }
+
+  let gte = (value, other) => value >= other
+
+  function isArguments(value) {
+    return Object.prototype.toString.call(value, value) === "[object, Arguments]"
+  }
+
+  function isArray(value) {
+    return type(value) === 'array'
+  }
+
+  function isArrayBuffer(value) {
+    return Object.prototype.toString.call(value, value) === "[object ArrayBuffer]"
+  }
   return {
+    isArrayBuffer,
+    isArray,
+    isArguments,
+    gte,
+    gt,
+    eq,
     conformsTo,
     castArray,
     defer,
