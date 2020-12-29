@@ -1451,7 +1451,60 @@ var coder_shui = function () {
   function isArrayBuffer(value) {
     return Object.prototype.toString.call(value, value) === "[object ArrayBuffer]"
   }
+
+  function isArrayLike(value) {
+    return type(value) !== 'function' && value.length !== undefined
+  }
+
+  function isArrayLikeObject(value) {
+    return isArrayLike(value) && type(value) === 'object'
+  }
+
+  function isBoolean(value) {
+    return type(value) === 'boolean'
+  }
+
+  function isDate(value) {
+    return Object.prototype.toString.call(value, value) === '[object,Date]'
+  }
+
+  function isElement(value) {
+    let reg = /^\[object HTML[\w]*Element\]$/
+    return reg.test(Object.prototype.toString.call(value, value))
+  }
+
+  function isEmpty(value) {
+    let flag = Object.prototype.toString.call(value, value)
+    if (flag == '[object,Array]') return value.length == 0
+    if (flag == '[object,Object]') return Object.keys(value).length == 0
+    if (flag == '[object,Set]') return value.size == 0
+    if (flag == '[object,Map]') return value.size == 0
+    if (flag == '[object,Arguments]') return value.length == 0
+    if (flag == '[object,String]') return value.length == 0
+    if (flag == '[object,Buffer]') return value.length == 0
+    return true
+  }
+
+
+  function isEqualWith(value, other, customizer) {
+    for (let i in value) {
+      let flag = customizer(value[i], other[i], i, value, other, stack = '这啥??')
+      if (flag == undefined) {
+        flag = isEqual(value[i], other[i])
+      }
+      if (!flag) return false
+    }
+    return true
+  }
   return {
+    isEqualWith,
+    isEqual,
+    isEmpty,
+    isElement,
+    isDate,
+    isBoolean,
+    isArrayLikeObject,
+    isArrayLike,
     isArrayBuffer,
     isArray,
     isArguments,

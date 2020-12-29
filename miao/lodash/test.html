@@ -343,18 +343,11 @@
     // }
     // console.log(zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]));
 
-    function castArray(value) {
-      if (type(value) == 'array') {
-        return value
-      } else {
-        let res = []
-        for (let i = 0; i < arguments.length; i++) {
-          res.push(arguments[i])
-        }
-        return res
-      }
+    function isElement(value) {
+      let reg = /^\[object HTML[\w]*Element\]$/
+      return reg.test(Object.prototype.toString.call(value, value))
     }
-    console.log(castArray());
+    console.log(isElement(document.head));
   </script>
 </body>
 
